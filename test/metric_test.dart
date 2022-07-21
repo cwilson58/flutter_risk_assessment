@@ -1,23 +1,37 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:risk_assessment/main.dart';
+import 'package:risk_assessment/riskCalculator.dart';
 
-void main(){
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+void main() {
+  test('metric risk is zero', () {
+    Metric metric = Metric();
+    expect(metric.getRisk(), 0.0);
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  test('metric risk is <1/3', () {
+    Metric metric = Metric();
+    metric.setLowRisk(1);
+    metric.setNoRisk(2);
+    metric.calcRisk();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(metric.getRisk(), (1 / 3) / 3);
+  });
+  test('1/3 < risk < 2/3', () {
+    Metric metric = Metric();
+    metric.setLowRisk(2);
+    metric.setNoRisk(1);
+    metric.calcRisk();
+    expect(metric.getRisk(), (2 / 3) / 3);
+  });
+  test('2/3 < risk < 1', () {
+    Metric metric = Metric();
+    metric.setMedRisk(2);
+    metric.setNoRisk(1);
+    metric.calcRisk();
+    expect(metric.getRisk(), (4 / 3) / 3);
   });
 }
