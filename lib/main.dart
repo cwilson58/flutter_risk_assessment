@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: const Color(0xFF515151)
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -69,6 +70,13 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
+    double appWidth = MediaQuery.of(context).size.width;
+    double appHeight = MediaQuery.of(context).size.height;
+
+    double mainWindowWidth = appWidth * 0.85;
+    double mainWindowHeight = appHeight * 0.8;
+
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -95,6 +103,99 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Container(
+              width:mainWindowWidth,
+              height:mainWindowHeight,
+              margin: const EdgeInsets.only(bottom:20),
+              decoration: const BoxDecoration(
+                color: Color(0xFFD9D9D9),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xFF222222),
+                    spreadRadius: 4,
+                    blurRadius: 4,
+                    offset: Offset(0, 3)
+                  )
+                ]
+              ),
+              child: Visibility(
+                visible: true,
+                child: Row(
+                  children: <Widget> [
+                    //Left Column
+                    Container(
+                      width:mainWindowWidth * 0.75,
+                      height:mainWindowHeight,
+              
+                      child: Column(children: <Widget>[
+                        Container(
+                          width:mainWindowWidth * 0.75,
+                          height:appHeight * 0.1,
+              
+                          child: const Center(
+                            child: Text(
+                              "Metric Description", 
+                              style: TextStyle(
+                                color: Color(0xFF000000),
+                                fontSize: 64,
+                              ),
+                            ),
+                          )
+                        ),
+                        const Divider(
+                          height:5,
+                          color: Color(0xFF000000),
+                          thickness: 5,
+                        ),
+                        Container(
+                          width:mainWindowWidth * 0.75,
+                          height:appHeight * 0.7 - 5,
+                        )
+                      ],
+                      )
+                    ),
+                    const VerticalDivider(
+                      width:5,
+                      color: Color(0xFF000000),
+                      thickness: 5,
+                    ),
+                    //Right Column
+                    Container(
+                      width:mainWindowWidth * 0.25 -5,
+                      height:mainWindowHeight,
+                      
+                      child: Column(children: <Widget>[
+                        Container(
+                          width:mainWindowWidth * 0.75,
+                          height:appHeight * 0.1,
+
+                          child: const Center(
+                            child: Text(
+                              "Risk Level", 
+                              style: TextStyle(
+                                color: Color(0xFF000000),
+                                fontSize: 52,
+                              ),
+                            ),
+                          )
+                        ),
+                        const Divider(
+                          height:5,
+                          color: Color(0xFF000000),
+                          thickness: 5,
+                        ),
+                        Container(
+                          width:mainWindowWidth * 0.75,
+                          height:appHeight * 0.7 - 5,
+                        )
+                      ],
+                      )
+                    ),
+                  ]
+                ),
+              )
+            ),
+
             const Text(
               'You have pushed the button this many times:',
             ),
