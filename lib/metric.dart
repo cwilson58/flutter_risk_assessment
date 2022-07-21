@@ -17,6 +17,7 @@ class _MetricState extends State<Metric> {
 
     void calcRisk(){
         _risk = (0.3333*_lowRiskVotes) + (0.6666*_medRiskVotes) + _highRiskVotes;
+        setState(() {});
     }
 
     double getRisk(){
