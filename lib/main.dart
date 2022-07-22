@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'riskCalculator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -6,25 +7,13 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: const Color(0xFF515151)
-      ),
+          primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: const Color(0xFF515151)),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -104,98 +93,95 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
-              width:mainWindowWidth,
-              height:mainWindowHeight,
-              margin: const EdgeInsets.only(bottom:20),
-              decoration: const BoxDecoration(
-                color: Color(0xFFD9D9D9),
-                boxShadow: [
+                width: mainWindowWidth,
+                height: mainWindowHeight,
+                margin: const EdgeInsets.only(bottom: 20),
+                decoration:
+                    const BoxDecoration(color: Color(0xFFD9D9D9), boxShadow: [
                   BoxShadow(
-                    color: Color(0xFF222222),
-                    spreadRadius: 4,
-                    blurRadius: 4,
-                    offset: Offset(0, 3)
-                  )
-                ]
-              ),
-              child: Visibility(
-                visible: true,
-                child: Row(
-                  children: <Widget> [
+                      color: Color(0xFF222222),
+                      spreadRadius: 4,
+                      blurRadius: 4,
+                      offset: Offset(0, 3))
+                ]),
+                child: Visibility(
+                  visible: true,
+                  child: Row(children: <Widget>[
                     //Left Column
                     Container(
-                      width:mainWindowWidth * 0.75,
-                      height:mainWindowHeight,
-              
-                      child: Column(children: <Widget>[
-                        Container(
-                          width:mainWindowWidth * 0.75,
-                          height:appHeight * 0.1,
-              
-                          child: const Center(
-                            child: Text(
-                              "Metric Description", 
-                              style: TextStyle(
-                                color: Color(0xFF000000),
-                                fontSize: 64,
-                              ),
+                        width: mainWindowWidth * 0.75,
+                        height: mainWindowHeight,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                                width: mainWindowWidth * 0.75,
+                                height: appHeight * 0.1,
+                                child: const Center(
+                                  child: Text(
+                                    "Metric Description",
+                                    style: TextStyle(
+                                      color: Color(0xFF000000),
+                                      fontSize: 64,
+                                    ),
+                                  ),
+                                )),
+                            const Divider(
+                              height: 5,
+                              color: Color(0xFF000000),
+                              thickness: 5,
                             ),
-                          )
-                        ),
-                        const Divider(
-                          height:5,
-                          color: Color(0xFF000000),
-                          thickness: 5,
-                        ),
-                        Container(
-                          width:mainWindowWidth * 0.75,
-                          height:appHeight * 0.7 - 5,
-                        )
-                      ],
-                      )
-                    ),
+                            //left column data
+                            Container(
+                              width: mainWindowWidth * 0.75,
+                              height: appHeight * 0.7 - 5,
+                              child: RiskCalculator(),
+                            )
+                          ],
+                        )),
                     const VerticalDivider(
-                      width:5,
+                      width: 5,
                       color: Color(0xFF000000),
                       thickness: 5,
                     ),
                     //Right Column
                     Container(
-                      width:mainWindowWidth * 0.25 -5,
-                      height:mainWindowHeight,
-                      
-                      child: Column(children: <Widget>[
-                        Container(
-                          width:mainWindowWidth * 0.75,
-                          height:appHeight * 0.1,
-
-                          child: const Center(
-                            child: Text(
-                              "Risk Level", 
-                              style: TextStyle(
-                                color: Color(0xFF000000),
-                                fontSize: 52,
-                              ),
+                        width: mainWindowWidth * 0.25 - 5,
+                        height: mainWindowHeight,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                                width: mainWindowWidth * 0.75,
+                                height: appHeight * 0.1,
+                                child: const Center(
+                                  child: Text(
+                                    "Risk Level",
+                                    style: TextStyle(
+                                      color: Color(0xFF000000),
+                                      fontSize: 52,
+                                    ),
+                                  ),
+                                )),
+                            const Divider(
+                              height: 5,
+                              color: Color(0xFF000000),
+                              thickness: 5,
                             ),
-                          )
-                        ),
-                        const Divider(
-                          height:5,
-                          color: Color(0xFF000000),
-                          thickness: 5,
-                        ),
-                        Container(
-                          width:mainWindowWidth * 0.75,
-                          height:appHeight * 0.7 - 5,
-                        )
-                      ],
-                      )
-                    ),
-                  ]
-                ),
-              )
-            ),
-
+                            //Right Column Data
+                            Container(
+                              width: mainWindowWidth * 0.75,
+                              height: appHeight * 0.7 - 5,
+                              child: const Text(
+                                "COLOUR",
+                                style: TextStyle(
+                                  color: Color(0xFF000000),
+                                  fontSize: 52,
+                                ),
+                              ),
+                            )
+                          ],
+                        )),
+                  ]),
+                )),
             const Text(
               'You have pushed the button this many times:',
             ),
