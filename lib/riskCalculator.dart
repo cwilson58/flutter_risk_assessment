@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 
 class RiskCalculator extends StatefulWidget {
-  List<Metric> metricRisks = [];
   @override
-  _RiskState createState() => _RiskState(metricRisks);
+  _RiskState createState() => _RiskState();
 }
 
 class _RiskState extends State<RiskCalculator> {
-  String _colourState = "Red";
+  //The state of the risk as a colour
+  static Color red = const Color.fromARGB(255, 255, 0, 0);
+  static Color green = const Color.fromARGB(255, 0, 255, 0);
+  static Color yellow = Color.fromARGB(255, 238, 255, 0);
+
+  Color _colourState = red;
   //need a list of metric risks
   List<Metric> metricRisks = [];
-  //Takes in all the riskiness of each metric then sets the _colourState
-  _RiskState(List<Metric> risks) {
-    metricRisks = risks;
+  _RiskState() {
+    metricRisks.add(Metric());
   }
   void calculateState() {
     double totalRisk = 0.0;
@@ -23,18 +26,22 @@ class _RiskState extends State<RiskCalculator> {
         });
     totalRisk = totalRisk / votes;
     if (totalRisk < 0.3333) {
-      _colourState = "GREEN";
+      _colourState = green;
     } else if (totalRisk < 0.6666) {
-      _colourState = "YELLOW";
+      _colourState = yellow;
     } else {
-      _colourState = "RED";
+      _colourState = red;
     }
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+        body: Container(
+      child: Text(metricRisks[0].metricName),
+    ));
   }
 }
 
@@ -48,6 +55,9 @@ class Metric {
   int _medRiskVotes = 0;
   String? _highRiskName;
   int _highRiskVotes = 0;
+  String metricName = "Edit this metric!";
+  Metric() {}
+
   void calcRisk() {
     _risk = (((1 / 3) * _lowRiskVotes) +
             ((2 / 3) * _medRiskVotes) +
@@ -73,5 +83,21 @@ class Metric {
 
   void setHighRisk(int votes) {
     _highRiskVotes = votes;
+  }
+
+  void setNoRiskName(String name) {
+    _noRiskName = name;
+  }
+
+  void setLowRiskName(String name) {
+    _lowRiskName = name;
+  }
+
+  void setMedRiskName(String name) {
+    _medRiskName = name;
+  }
+
+  void setHighRiskName(String name) {
+    _highRiskName = name;
   }
 }
