@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'riskCalculator.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
@@ -10,14 +12,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Metrics Calculator',
       theme: ThemeData(
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: const Color(0xFF515151)),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Project Name'),
     );
   }
 }
+
+//TO DO: SET WINDOW MAX WIDTH TO 1000
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -41,9 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _homePage = true;
 
   void _sethomePage() {
-      setState((){
-        _homePage = !_homePage;
-      });
+    setState(() {
+      _homePage = !_homePage;
+    });
   }
 
   @override
@@ -65,7 +69,34 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        centerTitle: true,
+        leadingWidth: 600,
+        leading: Text(
+          widget.title,
+          style: const TextStyle(
+            color: Color(0xFFFFFFFF),
+            fontSize: 48,
+          ),
+        ),
+        title: Row(
+          children: const <Widget>[
+            Text(
+              "Total Risk:",
+              style: TextStyle(
+                color: Color(0xFFFFFFFF),
+                fontSize: 32,
+              ),
+            ),
+            Text(
+              "Green",
+              style: TextStyle(
+                color: Color(0xFF01B100),
+                fontSize: 32,
+              ),
+            ),
+          ],
+        ),
+        backgroundColor: const Color(0xFF08006A),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -94,106 +125,153 @@ class _MyHomePageState extends State<MyHomePage> {
                 decoration:
                     const BoxDecoration(color: Color(0xFFD9D9D9), boxShadow: [
                   BoxShadow(
-                    color: Color(0xFF222222),
-                    spreadRadius: 4,
-                    blurRadius: 4,
-                    offset: Offset(0, 3)
-                  )
-                ]
-              ),
-              child: Visibility(
-                visible: _homePage,
-                child: Row(
-                  children: <Widget> [
-                    //Left Column
-                    Container(
-                        width: mainWindowWidth * 0.75,
-                        height: mainWindowHeight,
-                        child: Column(
-                          children: <Widget>[
-                            Container(
-                                width: mainWindowWidth * 0.75,
-                                height: appHeight * 0.1,
-                                child: const Center(
-                                  child: Text(
-                                    "Metric Description",
-                                    style: TextStyle(
-                                      color: Color(0xFF000000),
-                                      fontSize: 64,
-                                    ),
-                                  ),
-                                )),
-                            const Divider(
-                              height: 5,
-                              color: Color(0xFF000000),
-                              thickness: 5,
-                            ),
-                            //left column data
-                            Container(
-                              width: mainWindowWidth * 0.75,
-                              height: appHeight * 0.7 - 5,
-                              child: RiskCalculator(),
-                            )
-                          ],
-                        )),
-                    const VerticalDivider(
-                      width: 5,
-                      color: Color(0xFF000000),
-                      thickness: 5,
-                    ),
-                    //Right Column
-                    Container(
-                      width: mainWindowWidth * 0.25 - 5,
-                      height: mainWindowHeight,
-                      child: Column(
+                      color: Color(0xFF222222),
+                      spreadRadius: 4,
+                      blurRadius: 4,
+                      offset: Offset(0, 3))
+                ]),
+                child: Stack(
+                  children: <Widget>[
+                    //Index page
+                    Visibility(
+                      visible: _homePage,
+                      child: Row(
                         children: <Widget>[
+                          //Left Column
                           Container(
-                            width: mainWindowWidth * 0.75,
-                            height: appHeight * 0.1,
-                            child: const Center(
-                              child: Text(
-                                "Risk Level",
-                                style: TextStyle(
-                                  color: Color(0xFF000000),
-                                  fontSize: 52,
-                                ),
-                              ),
-                            )
-                          ),
-                          const Divider(
-                            height: 5,
+                              width: mainWindowWidth * 0.75,
+                              height: mainWindowHeight,
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                      width: mainWindowWidth * 0.75,
+                                      height: appHeight * 0.1,
+                                      child: const Center(
+                                        child: Text(
+                                          "Metric Description",
+                                          style: TextStyle(
+                                            color: Color(0xFF000000),
+                                            fontSize: 64,
+                                          ),
+                                        ),
+                                      )),
+                                  const Divider(
+                                    height: 5,
+                                    color: Color(0xFF000000),
+                                    thickness: 5,
+                                  ),
+                                  //left column data
+                                  Container(
+                                    width: mainWindowWidth * 0.75,
+                                    height: appHeight * 0.7 - 5,
+                                    child: RiskCalculator(),
+                                  )
+                                ],
+                              )),
+                          const VerticalDivider(
+                            width: 5,
                             color: Color(0xFF000000),
                             thickness: 5,
                           ),
-                        ]
-                      )
+                          //Right Column
+                          Container(
+                              width: mainWindowWidth * 0.25 - 5,
+                              height: mainWindowHeight,
+                              child: Column(children: <Widget>[
+                                Container(
+                                    width: mainWindowWidth * 0.25,
+                                    height: appHeight * 0.1,
+                                    child: const Center(
+                                      child: Text(
+                                        "COLOUR",
+                                        style: TextStyle(
+                                          color: Color(0xFF000000),
+                                          fontSize: 52,
+                                        ),
+                                      ),
+                                    )),
+                                const Divider(
+                                  height: 5,
+                                  color: Color(0xFF000000),
+                                  thickness: 5,
+                                ),
+                              ])),
+                        ],
+                      ),
                     ),
-                    const Divider(
-                      height:5,
-                      color: Color(0xFF000000),
-                      thickness: 5,
-                    ),
-                    Container(
-                      width:mainWindowWidth * 0.75,
-                      height:appHeight * 0.7 - 5,
-                    )
+                    Visibility(visible: !_homePage, child: Text("Hello"))
                   ],
+                )),
+            Visibility(
+              visible: _homePage,
+              child: SizedBox(
+                width: appWidth * 0.2,
+                height: 50,
+                child: TextButton(
+                  onPressed: _sethomePage,
+                  style: ButtonStyle(
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.blue.shade800),
+                  ),
+                  child: const Text(
+                    "Assess",
+                    style: TextStyle(
+                      color: Color(0xFFFFFFFF),
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
-              )
-            ),
-            SizedBox(
-              width:100,
-              height:50,
-              child: TextButton(
-                onPressed: _sethomePage,
-                style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.blue.shade800),
-                  
-                ),
-                child: const Text("Assess"),
               ),
             ),
+            Visibility(
+                visible: !_homePage,
+                child: ButtonBar(
+                  alignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    SizedBox(
+                      width: appWidth * 0.2,
+                      height: 50,
+                      child: TextButton(
+                        onPressed: _sethomePage,
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.blue.shade800),
+                        ),
+                        child: const Text(
+                          "Previous",
+                          style: TextStyle(
+                            color: Color(0xFFFFFFFF),
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: appWidth * 0.2,
+                      height: 50,
+                      child: TextButton(
+                        onPressed: _sethomePage,
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.white),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.blue.shade800),
+                        ),
+                        child: const Text(
+                          "Submit",
+                          style: TextStyle(
+                            color: Color(0xFFFFFFFF),
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
           ],
         ),
       ),
