@@ -13,6 +13,7 @@ class _RiskState extends State<RiskCalculator> {
 
   Color _colourState = red;
   String _stringState = "Red";
+  int _pageNumber = 0;
 
   //need a list of metric risks
   List<Metric> metricRisks = [];
@@ -341,13 +342,9 @@ class _RiskState extends State<RiskCalculator> {
                                   Container(
                                       width: mainWindowWidth * 0.75,
                                       height: mainWindowHeight * 0.8 - 21,
-                                      child: const Center(
-                                          child: Text(
-                                        "INDICATORS",
-                                        style: TextStyle(
-                                          color: Color(0xFF000000),
-                                          fontSize: 52,
-                                        ),
+                                      child: Center(
+                                          child: Column(
+                                        children: getCurrentPageIndicators(),
                                       ))),
                                   Container(
                                       width: mainWindowWidth * 0.25,
@@ -458,6 +455,31 @@ class _RiskState extends State<RiskCalculator> {
       toRet.add(Text(element.riskColourName,
           style: TextStyle(color: element.riskColour)));
     });
+    return toRet;
+  }
+
+  List<Widget> getCurrentPageIndicators() {
+    List<Widget> toRet = [];
+    toRet.add(Text(metricRisks[_pageNumber]._noRiskName,
+        style: const TextStyle(
+          color: Color(0xFF000000),
+          fontSize: 52,
+        )));
+    toRet.add(Text(metricRisks[_pageNumber]._lowRiskName,
+        style: const TextStyle(
+          color: Color(0xFF000000),
+          fontSize: 52,
+        )));
+    toRet.add(Text(metricRisks[_pageNumber]._medRiskName,
+        style: const TextStyle(
+          color: Color(0xFF000000),
+          fontSize: 52,
+        )));
+    toRet.add(Text(metricRisks[_pageNumber]._highRiskName,
+        style: const TextStyle(
+          color: Color(0xFF000000),
+          fontSize: 52,
+        )));
     return toRet;
   }
 }
