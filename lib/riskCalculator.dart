@@ -397,7 +397,7 @@ class _RiskState extends State<RiskCalculator> {
                       width: appWidth * 0.2,
                       height: 50,
                       child: TextButton(
-                        onPressed: _sethomePage,
+                        onPressed: previousPage,
                         style: ButtonStyle(
                           foregroundColor:
                               MaterialStateProperty.all<Color>(Colors.white),
@@ -417,7 +417,7 @@ class _RiskState extends State<RiskCalculator> {
                       width: appWidth * 0.2,
                       height: 50,
                       child: TextButton(
-                        onPressed: _sethomePage,
+                        onPressed: nextPage,
                         style: ButtonStyle(
                           foregroundColor:
                               MaterialStateProperty.all<Color>(Colors.white),
@@ -501,6 +501,36 @@ class _RiskState extends State<RiskCalculator> {
           fontSize: 52,
         )));
     return toRet;
+  }
+
+  void nextPage()
+  {
+    if(_pageNumber<metricRisks.length-1){
+      _pageNumber++;
+      getCurrentPageIndicators;
+      setState(() {
+      });
+    }
+    else{
+      _homePage = !_homePage;
+      _pageNumber=0;
+      setState(() {
+      });
+    }
+  }
+  void previousPage()
+  {
+    if(_pageNumber>0){
+      _pageNumber--;
+      getCurrentPageIndicators;
+      setState(() {
+      });
+    }
+    else{
+      _homePage = !_homePage;
+      setState(() {
+      });
+    }
   }
 }
 
