@@ -15,7 +15,37 @@ class _RiskState extends State<RiskCalculator> {
   //need a list of metric risks
   List<Metric> metricRisks = [];
   _RiskState() {
-    metricRisks.add(Metric());
+    //Phase one hardcoded values
+    metricRisks.add(Metric.param(
+        "The Total Number of Defects",
+        "The Number of Defects are well below expected",
+        "The number of defects are about where expected",
+        "The number of defects is higher than we would expect",
+        "The number of defects greatly exceeds expectations"));
+    metricRisks.add(Metric.param(
+        "Schedule Feasibility",
+        "Can be easily completed in the scheduled time",
+        "Can be completed within the scheduled time with strict management",
+        "Project may be completed within the scheduled time, but will require crunch",
+        "The project is unlikely to be completed on time"));
+    metricRisks.add(Metric.param(
+        "Design Progress",
+        "The design is complete",
+        "The design is mostly complete with no major problems noted",
+        "The design is incomplete and there is one noted major problem with a mitigation strategy",
+        "The design is incomplete, has several major problems and no mitigation plan"));
+    metricRisks.add(Metric.param(
+        "Implementation Progress",
+        "The implementation is ahead of schedule",
+        "the implementation is on schedule",
+        "the implementation is slightly behind schedule",
+        "the implementation is far behind schedule"));
+    metricRisks.add(Metric.param(
+        "Integration Progress",
+        "No major integration problems detected",
+        "Minor integration problems detected",
+        "At least one major integration problem, with a plan to remedy",
+        "Multiple major integration problems with no plans to remedy"));
   }
   void calculateState() {
     double totalRisk = 0.0;
@@ -267,16 +297,24 @@ class _RiskState extends State<RiskCalculator> {
 
 class Metric {
   double _risk = 0.0;
-  String? _noRiskName;
+  String _noRiskName = "";
   int _noRiskVotes = 0;
-  String? _lowRiskName;
+  String _lowRiskName = "";
   int _lowRiskVotes = 0;
-  String? _medRiskName;
+  String _medRiskName = "";
   int _medRiskVotes = 0;
-  String? _highRiskName;
+  String _highRiskName = "";
   int _highRiskVotes = 0;
   String metricName = "Edit this metric!";
   Metric() {}
+  Metric.param(String name, String noRisk, String lowRisk, String medRisk,
+      String highRisk) {
+    metricName = name;
+    _noRiskName = noRisk;
+    _lowRiskName = lowRisk;
+    _medRiskName = medRisk;
+    _highRiskName = highRisk;
+  }
 
   void calcRisk() {
     _risk = (((1 / 3) * _lowRiskVotes) +
