@@ -349,15 +349,10 @@ class _RiskState extends State<RiskCalculator> {
                                   Container(
                                       width: mainWindowWidth * 0.25,
                                       height: mainWindowHeight * 0.8 - 21,
-                                      child: const Center(
-                                        child: Text(
-                                          "INSERT VOTES HERE",
-                                          style: TextStyle(
-                                            color: Color(0xFF000000),
-                                            fontSize: 52,
-                                          ),
-                                        ),
-                                      ))
+                                      child: Center(
+                                          child: Column(
+                                        children: getPageVotes(),
+                                      ))),
                                 ],
                               ),
                             )
@@ -463,7 +458,8 @@ class _RiskState extends State<RiskCalculator> {
   List<Widget> getRiskColourList() {
     List<Widget> toRet = [];
     metricRisks.forEach((element) {
-      toRet.add(Text(element.riskColourName,
+      toRet.add(Text(
+        element.riskColourName,
         style: TextStyle(
           color: element.riskColour,
           fontSize: 48,
@@ -475,6 +471,97 @@ class _RiskState extends State<RiskCalculator> {
         thickness: 2,
       ));
     });
+    return toRet;
+  }
+
+  void decrementVote(int level) {
+    if (level == 0) {
+      if (metricRisks[_pageNumber]._noRiskVotes > 0) {
+        metricRisks[_pageNumber]._noRiskVotes--;
+      }
+    } else if (level == 1) {
+      if (metricRisks[_pageNumber]._lowRiskVotes > 0) {
+        metricRisks[_pageNumber]._lowRiskVotes--;
+      }
+    } else if (level == 2) {
+      if (metricRisks[_pageNumber]._medRiskVotes > 0) {
+        metricRisks[_pageNumber]._medRiskVotes--;
+      }
+    } else if (level == 3) {
+      if (metricRisks[_pageNumber]._lowRiskVotes > 0) {
+        metricRisks[_pageNumber]._highRiskVotes--;
+      }
+    }
+    setState(() {});
+  }
+
+  void incrementVote(int level) {
+    if (level == 0) {
+      metricRisks[_pageNumber]._noRiskVotes++;
+    } else if (level == 1) {
+      metricRisks[_pageNumber]._lowRiskVotes++;
+    } else if (level == 2) {
+      metricRisks[_pageNumber]._medRiskVotes++;
+    } else if (level == 3) {
+      metricRisks[_pageNumber]._highRiskVotes++;
+    }
+    setState(() {});
+  }
+
+  List<Widget> getPageVotes() {
+    List<Widget> toRet = [];
+    toRet.add(Row(
+      children: [
+        TextButton(
+          onPressed: () => decrementVote(0),
+          child: const Text("-"),
+        ),
+        Text(metricRisks[_pageNumber]._noRiskVotes.toString()),
+        TextButton(
+          onPressed: () => incrementVote(0),
+          child: const Text("+"),
+        ),
+      ],
+    ));
+    toRet.add(Row(
+      children: [
+        TextButton(
+          onPressed: () => decrementVote(1),
+          child: const Text("-"),
+        ),
+        Text(metricRisks[_pageNumber]._lowRiskVotes.toString()),
+        TextButton(
+          onPressed: () => incrementVote(1),
+          child: const Text("+"),
+        ),
+      ],
+    ));
+    toRet.add(Row(
+      children: [
+        TextButton(
+          onPressed: () => decrementVote(2),
+          child: const Text("-"),
+        ),
+        Text(metricRisks[_pageNumber]._medRiskVotes.toString()),
+        TextButton(
+          onPressed: () => incrementVote(2),
+          child: const Text("+"),
+        ),
+      ],
+    ));
+    toRet.add(Row(
+      children: [
+        TextButton(
+          onPressed: () => decrementVote(3),
+          child: const Text("-"),
+        ),
+        Text(metricRisks[_pageNumber]._highRiskVotes.toString()),
+        TextButton(
+          onPressed: () => incrementVote(3),
+          child: const Text("+"),
+        ),
+      ],
+    ));
     return toRet;
   }
 
