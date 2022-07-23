@@ -239,7 +239,7 @@ class _RiskState extends State<RiskCalculator> {
                               child: Row(
                                 children: [
                                   Container(
-                                      width: mainWindowWidth * 0.75,
+                                      width: mainWindowWidth * 0.85,
                                       height: mainWindowHeight * 0.1,
                                       child: Center(
                                         child: RichText(
@@ -287,8 +287,8 @@ class _RiskState extends State<RiskCalculator> {
                                     thickness: 5,
                                   ),
                                   Container(
-                                      width: mainWindowWidth * 0.25 - 5,
-                                      height: appHeight * 0.1,
+                                      width: mainWindowWidth * 0.15 - 5,
+                                      height: mainWindowHeight * 0.1,
                                       child: const Center(
                                         child: Text(
                                           "EDIT",
@@ -323,7 +323,7 @@ class _RiskState extends State<RiskCalculator> {
                                       ))),
                                   Container(
                                       width: mainWindowWidth * 0.25,
-                                      height: appHeight * 0.1,
+                                      height: mainWindowHeight * 0.1,
                                       child: const Center(
                                         child: Text(
                                           "Votes",
@@ -348,7 +348,7 @@ class _RiskState extends State<RiskCalculator> {
                                       ))),
                                   Container(
                                       width: mainWindowWidth * 0.25,
-                                      height: appHeight * 0.8 - 21,
+                                      height: mainWindowHeight * 0.8 - 21,
                                       child: const Center(
                                         child: Text(
                                           "INSERT VOTES HERE",
@@ -444,7 +444,18 @@ class _RiskState extends State<RiskCalculator> {
   List<Widget> getRiskTitleList() {
     List<Widget> toRet = [];
     metricRisks.forEach((element) {
-      toRet.add(Text(element.metricName));
+      toRet.add(Text(
+        element.metricName,
+        style: const TextStyle(
+          color: Color(0xFF000000),
+          fontSize: 48,
+        ),
+      ));
+      toRet.add(const Divider(
+        height: 2,
+        color: Color(0xFF000000),
+        thickness: 2,
+      ));
     });
     return toRet;
   }
@@ -453,7 +464,16 @@ class _RiskState extends State<RiskCalculator> {
     List<Widget> toRet = [];
     metricRisks.forEach((element) {
       toRet.add(Text(element.riskColourName,
-          style: TextStyle(color: element.riskColour)));
+        style: TextStyle(
+          color: element.riskColour,
+          fontSize: 48,
+        ),
+      ));
+      toRet.add(const Divider(
+        height: 2,
+        color: Color(0xFF000000),
+        thickness: 2,
+      ));
     });
     return toRet;
   }
