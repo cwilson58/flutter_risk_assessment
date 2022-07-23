@@ -52,16 +52,14 @@ class _RiskState extends State<RiskCalculator> {
   }
   void calculateState() {
     double totalRisk = 0.0;
-    int votes = 0;
-    metricRisks.forEach((item) => () {
-          totalRisk += item.getRisk();
-          votes += 1;
-        });
-    totalRisk = totalRisk / votes;
-    if (totalRisk < 0.3333) {
+    metricRisks.forEach((item) {
+      totalRisk += item.getRisk();
+    });
+    totalRisk = totalRisk / metricRisks.length;
+    if (totalRisk < (1 / 3)) {
       _colourState = green;
       _stringState = "Green";
-    } else if (totalRisk < 0.6666) {
+    } else if (totalRisk < (2 / 3)) {
       _colourState = yellow;
       _stringState = "Yellow";
     } else {
@@ -628,7 +626,7 @@ class Metric {
 
   Color riskColour = red;
   String riskColourName = "Red";
-  double _risk = 0.0;
+  double _risk = 1;
   String _noRiskName = "";
   int _noRiskVotes = 0;
   String _lowRiskName = "";
@@ -649,6 +647,12 @@ class Metric {
   }
 
   void calcRisk() {
+    if (_noRiskVotes + _lowRiskVotes + _medRiskVotes + _highRiskVotes <= 0) {
+      _risk = 1;
+      riskColour = red;
+      riskColourName = "Red";
+      return;
+    }
     _risk = (((1 / 3) * _lowRiskVotes) +
             ((2 / 3) * _medRiskVotes) +
             _highRiskVotes) /
