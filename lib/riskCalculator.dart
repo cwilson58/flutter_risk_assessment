@@ -53,7 +53,7 @@ class _RiskState extends State<RiskCalculator> {
     double mainWindowHeight = appHeight * 0.8;
 
     return Scaffold(
- 
+
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
