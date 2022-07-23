@@ -350,14 +350,17 @@ class _RiskState extends State<RiskCalculator> {
                                       height: mainWindowHeight * 0.8 - 21,
                                       child: Center(
                                           child: Column(
-                                        children: getCurrentPageIndicators(),
+                                        children: getCurrentPageIndicators(
+                                            mainWindowWidth,
+                                            mainWindowHeight * 0.8 - 21),
                                       ))),
                                   Container(
                                       width: mainWindowWidth * 0.25,
                                       height: mainWindowHeight * 0.8 - 21,
                                       child: Center(
                                           child: Column(
-                                        children: getPageVotes(),
+                                        children: getPageVotes(mainWindowWidth,
+                                            mainWindowHeight * 0.8 - 21),
                                       ))),
                                 ],
                               ),
@@ -440,8 +443,6 @@ class _RiskState extends State<RiskCalculator> {
         ),
       ),
     );
-
-
   }
 
   List<Widget> getRiskTitleList() {
@@ -520,92 +521,136 @@ class _RiskState extends State<RiskCalculator> {
     setState(() {});
   }
 
-  List<Widget> getPageVotes() {
+  List<Widget> getPageVotes(double containerWidth, double containerHeight) {
     List<Widget> toRet = [];
-    toRet.add(Row(
-      children: [
-        TextButton(
-          onPressed: () => decrementVote(0),
-          child: const Text("-"),
-        ),
-        Text(metricRisks[_pageNumber]._noRiskVotes.toString()),
-        TextButton(
-          onPressed: () => incrementVote(0),
-          child: const Text("+"),
-        ),
-      ],
+    toRet.add(Container(
+      height: containerHeight * 0.25 - 1.5,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButton(
+            onPressed: () => decrementVote(0),
+            child: const Text("-"),
+          ),
+          Text(metricRisks[_pageNumber]._noRiskVotes.toString()),
+          TextButton(
+            onPressed: () => incrementVote(0),
+            child: const Text("+"),
+          ),
+        ],
+      ),
     ));
-    toRet.add(Row(
-      children: [
-        TextButton(
-          onPressed: () => decrementVote(1),
-          child: const Text("-"),
-        ),
-        Text(metricRisks[_pageNumber]._lowRiskVotes.toString()),
-        TextButton(
-          onPressed: () => incrementVote(1),
-          child: const Text("+"),
-        ),
-      ],
+    toRet.add(const Divider(
+      height: 2,
+      color: Color(0xFF000000),
+      thickness: 2,
     ));
-    toRet.add(Row(
-      children: [
-        TextButton(
-          onPressed: () => decrementVote(2),
-          child: const Text("-"),
-        ),
-        Text(metricRisks[_pageNumber]._medRiskVotes.toString()),
-        TextButton(
-          onPressed: () => incrementVote(2),
-          child: const Text("+"),
-        ),
-      ],
+    toRet.add(Container(
+      height: containerHeight * 0.25 - 1.5,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButton(
+            onPressed: () => decrementVote(1),
+            child: const Text("-"),
+          ),
+          Text(metricRisks[_pageNumber]._lowRiskVotes.toString()),
+          TextButton(
+            onPressed: () => incrementVote(1),
+            child: const Text("+"),
+          ),
+        ],
+      ),
     ));
-    toRet.add(Row(
-      children: [
-        TextButton(
-          onPressed: () => decrementVote(3),
-          child: const Text("-"),
-        ),
-        Text(metricRisks[_pageNumber]._highRiskVotes.toString()),
-        TextButton(
-          onPressed: () => incrementVote(3),
-          child: const Text("+"),
-        ),
-      ],
+    toRet.add(const Divider(
+      height: 2,
+      color: Color(0xFF000000),
+      thickness: 2,
+    ));
+    toRet.add(Container(
+      height: containerHeight * 0.25 - 1.5,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButton(
+            onPressed: () => decrementVote(2),
+            child: const Text("-"),
+          ),
+          Text(metricRisks[_pageNumber]._medRiskVotes.toString()),
+          TextButton(
+            onPressed: () => incrementVote(2),
+            child: const Text("+"),
+          ),
+        ],
+      ),
+    ));
+    toRet.add(const Divider(
+      height: 2,
+      color: Color(0xFF000000),
+      thickness: 2,
+    ));
+    toRet.add(Container(
+      height: containerHeight * 0.25 - 1.5,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButton(
+            onPressed: () => decrementVote(3),
+            child: const Text("-"),
+          ),
+          Text(metricRisks[_pageNumber]._highRiskVotes.toString()),
+          TextButton(
+            onPressed: () => incrementVote(3),
+            child: const Text("+"),
+          ),
+        ],
+      ),
     ));
     return toRet;
   }
 
-  List<Widget> getCurrentPageIndicators() {
+  List<Widget> getCurrentPageIndicators(
+      double containerWidth, double containerHeight) {
     List<Widget> toRet = [];
-    toRet.add(FittedBox(
-      child: Text(metricRisks[_pageNumber]._noRiskName,
-          style: const TextStyle(
-            color: Color(0xFF000000),
-            fontSize: 52,
-          )),
+    toRet.add(Container(
+      height: containerHeight * 0.25 - 1.5,
+      child: FittedBox(
+        child: Text(metricRisks[_pageNumber]._noRiskName,
+            style: const TextStyle(
+              color: Color(0xFF000000),
+              fontSize: 52,
+            )),
+      ),
     ));
-    toRet.add(FittedBox(
-      child: Text(metricRisks[_pageNumber]._lowRiskName,
-          style: const TextStyle(
-            color: Color(0xFF000000),
-            fontSize: 52,
-          )),
+    toRet.add(Container(
+      height: containerHeight * 0.25 - 1.5,
+      child: FittedBox(
+        child: Text(metricRisks[_pageNumber]._lowRiskName,
+            style: const TextStyle(
+              color: Color(0xFF000000),
+              fontSize: 52,
+            )),
+      ),
     ));
-    toRet.add(FittedBox(
-      child: Text(metricRisks[_pageNumber]._medRiskName,
-          style: const TextStyle(
-            color: Color(0xFF000000),
-            fontSize: 52,
-          )),
+    toRet.add(Container(
+      height: containerHeight * 0.25 - 1.5,
+      child: FittedBox(
+        child: Text(metricRisks[_pageNumber]._medRiskName,
+            style: const TextStyle(
+              color: Color(0xFF000000),
+              fontSize: 52,
+            )),
+      ),
     ));
-    toRet.add(FittedBox(
-      child: Text(metricRisks[_pageNumber]._highRiskName,
-          style: const TextStyle(
-            color: Color(0xFF000000),
-            fontSize: 52,
-          )),
+    toRet.add(Container(
+      height: containerHeight * 0.25 - 1.5,
+      child: FittedBox(
+        child: Text(metricRisks[_pageNumber]._highRiskName,
+            style: const TextStyle(
+              color: Color(0xFF000000),
+              fontSize: 52,
+            )),
+      ),
     ));
     return toRet;
   }
@@ -614,16 +659,13 @@ class _RiskState extends State<RiskCalculator> {
     if (_pageNumber < metricRisks.length - 1) {
       _pageNumber++;
       getCurrentPageIndicators;
-      if(_pageNumber==metricRisks.length-1){
+      if (_pageNumber == metricRisks.length - 1) {
         assessSubmitString = "Submit";
-      }
-      else{
+      } else {
         assessSubmitString = "Next";
       }
-      setState(() {
-      });
-    }
-    else{
+      setState(() {});
+    } else {
       _homePage = !_homePage;
       _pageNumber = 0;
       setState(() {});
