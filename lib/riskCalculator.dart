@@ -185,7 +185,6 @@ class _RiskState extends State<RiskCalculator> {
                                     width: mainWindowWidth * 0.75,
                                     height: appHeight * 0.7 - 5,
                                     child: Text(metricRisks[0].metricName),
-                                    //child: RiskCalculator(),
                                   )
                                 ],
                               )),
@@ -224,61 +223,76 @@ class _RiskState extends State<RiskCalculator> {
                         visible: !_homePage,
                         child: Column(
                           children: <Widget>[
-                            Container(
-                                width: mainWindowWidth * 0.75,
-                                height: appHeight * 0.1,
-                                child: Center(
-                                  child: RichText(
-                                    text: const TextSpan(
-                                        text: "Total Risk:",
+                            Row(
+                              children: [
+                                Container(
+                                    color:green,
+                                    width: mainWindowWidth * 0.75,
+                                    height: appHeight * 0.1,
+                                    child: Center(
+                                      child: RichText(
+                                        text: const TextSpan(
+                                            text: "Total Risk:",
+                                            style: TextStyle(
+                                              color: Color(0xFF000000),
+                                              fontSize: 48,
+                                            ),
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                  text: "Yellow",
+                                                  style: TextStyle(
+                                                      color: Color(0xFFFFFF00),
+                                                      fontSize: 48,
+                                                      shadows: [
+                                                        Shadow(
+                                                            offset: Offset(
+                                                                -1.5, -1.5),
+                                                            color:
+                                                                Colors.black),
+                                                        Shadow(
+                                                            offset: Offset(
+                                                                1.5, -1.5),
+                                                            color:
+                                                                Colors.black),
+                                                        Shadow(
+                                                            offset: Offset(
+                                                                1.5, 1.5),
+                                                            color:
+                                                                Colors.black),
+                                                        Shadow(
+                                                            offset: Offset(
+                                                                -1.5, 1.5),
+                                                            color:
+                                                                Colors.black),
+                                                      ]))
+                                            ]),
+                                      ),
+                                    )),
+                                const VerticalDivider(
+                                  width: 5,
+                                  color: Color(0xFF000000),
+                                  thickness: 5,
+                                ),
+                                Container(
+                                   color:red,
+                                    width: mainWindowWidth * 0.25 -5,
+                                    height: appHeight * 0.1,
+                                    child: const Center(
+                                      child: Text(
+                                        "EDIT",
                                         style: TextStyle(
                                           color: Color(0xFF000000),
-                                          fontSize: 48,
+                                          fontSize: 52,
                                         ),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                              text: "Yellow",
-                                              style: TextStyle(
-                                                  color: Color(0xFFFFFF00),
-                                                  fontSize: 48,
-                                                  shadows: [
-                                                    Shadow(
-                                                        offset:
-                                                            Offset(-1.5, -1.5),
-                                                        color: Colors.black),
-                                                    Shadow(
-                                                        offset:
-                                                            Offset(1.5, -1.5),
-                                                        color: Colors.black),
-                                                    Shadow(
-                                                        offset:
-                                                            Offset(1.5, 1.5),
-                                                        color: Colors.black),
-                                                    Shadow(
-                                                        offset:
-                                                            Offset(-1.5, 1.5),
-                                                        color: Colors.black),
-                                                  ]))
-                                        ]),
-                                  ),
-                                )),
+                                      ),
+                                    ))
+                              ],
+                            ),
                             const Divider(
                               height: 5,
                               color: Color(0xFF000000),
                               thickness: 5,
                             ),
-                            Container(
-                                width: mainWindowWidth * 0.25,
-                                height: appHeight * 0.1,
-                                child: const Center(
-                                  child: Text(
-                                    "EDIT",
-                                    style: TextStyle(
-                                      color: Color(0xFF000000),
-                                      fontSize: 52,
-                                    ),
-                                  ),
-                                ))
                           ],
                         )),
                   ],
