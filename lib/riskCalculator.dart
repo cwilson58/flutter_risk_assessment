@@ -217,6 +217,13 @@ class _RiskState extends State<RiskCalculator> {
                                   color: Color(0xFF000000),
                                   thickness: 5,
                                 ),
+                                Container(
+                                  width: mainWindowWidth * 0.25,
+                                  height: appHeight * 0.7 - 5,
+                                  child: Column(
+                                    children: getRiskColourList(),
+                                  ),
+                                ),
                               ])),
                         ],
                       ),
@@ -228,7 +235,7 @@ class _RiskState extends State<RiskCalculator> {
                             Row(
                               children: [
                                 Container(
-                                    color:green,
+                                    color: green,
                                     width: mainWindowWidth * 0.75,
                                     height: appHeight * 0.1,
                                     child: Center(
@@ -276,8 +283,8 @@ class _RiskState extends State<RiskCalculator> {
                                   thickness: 5,
                                 ),
                                 Container(
-                                   color:red,
-                                    width: mainWindowWidth * 0.25 -5,
+                                    color: red,
+                                    width: mainWindowWidth * 0.25 - 5,
                                     height: appHeight * 0.1,
                                     child: const Center(
                                       child: Text(
@@ -382,9 +389,24 @@ class _RiskState extends State<RiskCalculator> {
     });
     return toRet;
   }
+
+  List<Widget> getRiskColourList() {
+    List<Widget> toRet = [];
+    metricRisks.forEach((element) {
+      toRet.add(Text(element.riskColourName,
+          style: TextStyle(color: element.riskColour)));
+    });
+    return toRet;
+  }
 }
 
 class Metric {
+  static Color red = const Color.fromARGB(255, 255, 0, 0);
+  static Color green = const Color.fromARGB(255, 0, 255, 0);
+  static Color yellow = Color.fromARGB(255, 238, 255, 0);
+
+  Color riskColour = red;
+  String riskColourName = "Red";
   double _risk = 0.0;
   String _noRiskName = "";
   int _noRiskVotes = 0;
@@ -410,6 +432,16 @@ class Metric {
             ((2 / 3) * _medRiskVotes) +
             _highRiskVotes) /
         (_noRiskVotes + _lowRiskVotes + _medRiskVotes + _highRiskVotes);
+    if (_risk < (1 / 3)) {
+      riskColour = green;
+      riskColourName = "Green";
+    } else if (_risk < (2 / 3)) {
+      riskColour = yellow;
+      riskColourName = "Yellow";
+    } else {
+      riskColour = red;
+      riskColourName = "Red";
+    }
   }
 
   double getRisk() {
