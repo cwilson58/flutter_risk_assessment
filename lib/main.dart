@@ -59,12 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
 
-    double appWidth = MediaQuery.of(context).size.width;
-    double appHeight = MediaQuery.of(context).size.height;
-
-    double mainWindowWidth = appWidth * 0.85;
-    double mainWindowHeight = appHeight * 0.8;
-
     return Scaffold(
       body:Container(child: RiskCalculator())
     );

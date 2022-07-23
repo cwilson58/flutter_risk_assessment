@@ -58,6 +58,7 @@ class _RiskState extends State<RiskCalculator> {
         // the App.build method, and use it to set our appbar title.
         centerTitle: true,
         leadingWidth: 600,
+        backgroundColor: const Color(0xFF08006A),
         leading: const Text(
           "Project Name",
           style: TextStyle(
@@ -81,7 +82,6 @@ class _RiskState extends State<RiskCalculator> {
                     ))
               ]),
         ),
-        backgroundColor: const Color(0xFF08006A),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -149,7 +149,7 @@ class _RiskState extends State<RiskCalculator> {
                                   Container(
                                     width: mainWindowWidth * 0.75,
                                     height: appHeight * 0.7 - 5,
-                                    child:Text(metricRisks[0].metricName),
+                                    child: Text(metricRisks[0].metricName),
                                     //child: RiskCalculator(),
                                   )
                                 ],
