@@ -184,8 +184,10 @@ class _RiskState extends State<RiskCalculator> {
                                   Container(
                                     width: mainWindowWidth * 0.75,
                                     height: appHeight * 0.7 - 5,
-                                    child: Text(metricRisks[0].metricName),
-                                  )
+                                    child: Column(
+                                      children: getRiskTitleList(),
+                                    ),
+                                  ),
                                 ],
                               )),
                           const VerticalDivider(
@@ -371,6 +373,14 @@ class _RiskState extends State<RiskCalculator> {
         ),
       ),
     );
+  }
+
+  List<Widget> getRiskTitleList() {
+    List<Widget> toRet = [];
+    metricRisks.forEach((element) {
+      toRet.add(Text(element.metricName));
+    });
+    return toRet;
   }
 }
 
