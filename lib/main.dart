@@ -59,45 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
 
-    double appWidth = MediaQuery.of(context).size.width;
-    double appHeight = MediaQuery.of(context).size.height;
-
-    double mainWindowWidth = appWidth * 0.85;
-    double mainWindowHeight = appHeight * 0.8;
-
     return Scaffold(
-           appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        centerTitle: true,
-        leadingWidth: 600,
-        leading: const Text(
-          "Project Name",
-          style: TextStyle(
-            color: Color(0xFFFFFFFF),
-            fontSize: 48,
-          ),
-        ),
-        title: RichText(
-          text: const TextSpan(
-              text: "Total Risk:",
-              style: TextStyle(
-                color: Color(0xFFFFFFFF),
-                fontSize: 48,
-              ),
-              children: <TextSpan>[
-                TextSpan(
-                    text: "Green",
-                    style: TextStyle(
-                      color: Color(0xFF01B100),
-                      fontSize: 48,
-                    ))
-              ]),
-        ),
-        backgroundColor: const Color(0xFF08006A),
-      ),
-      body:Container(
-        child: RiskCalculator())
+      body:Container(child: RiskCalculator())
     );
   }
 }

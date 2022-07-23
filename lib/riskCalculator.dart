@@ -53,7 +53,36 @@ class _RiskState extends State<RiskCalculator> {
     double mainWindowHeight = appHeight * 0.8;
 
     return Scaffold(
-
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        centerTitle: true,
+        leadingWidth: 600,
+        backgroundColor: const Color(0xFF08006A),
+        leading: const Text(
+          "Project Name",
+          style: TextStyle(
+            color: Color(0xFFFFFFFF),
+            fontSize: 48,
+          ),
+        ),
+        title: RichText(
+          text: const TextSpan(
+              text: "Total Risk:",
+              style: TextStyle(
+                color: Color(0xFFFFFFFF),
+                fontSize: 48,
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                    text: "Green",
+                    style: TextStyle(
+                      color: Color(0xFF01B100),
+                      fontSize: 48,
+                    ))
+              ]),
+        ),
+      ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -120,7 +149,7 @@ class _RiskState extends State<RiskCalculator> {
                                   Container(
                                     width: mainWindowWidth * 0.75,
                                     height: appHeight * 0.7 - 5,
-                                    child:Text(metricRisks[0].metricName),
+                                    child: Text(metricRisks[0].metricName),
                                     //child: RiskCalculator(),
                                   )
                                 ],
