@@ -246,20 +246,23 @@ class _RiskState extends State<RiskCalculator> {
                                       height: mainWindowHeight * 0.1,
                                       child: Center(
                                         child: RichText(
-                                          text: const TextSpan(
-                                              text: "Metric Risk:",
-                                              style: TextStyle(
+                                          text: TextSpan(
+                                              text: "Total Risk:",
+                                              style: const TextStyle(
                                                 color: Color(0xFF000000),
                                                 fontSize: 48,
                                               ),
                                               children: <TextSpan>[
                                                 TextSpan(
-                                                    text: "Yellow",
+                                                    text:
+                                                        metricRisks[_pageNumber]
+                                                            .riskColourName,
                                                     style: TextStyle(
-                                                        color:
-                                                            Color(0xFFFFFF00),
+                                                        color: metricRisks[
+                                                                _pageNumber]
+                                                            .riskColour,
                                                         fontSize: 48,
-                                                        shadows: [
+                                                        shadows: const [
                                                           Shadow(
                                                               offset: Offset(
                                                                   -1.5, -1.5),
@@ -493,10 +496,12 @@ class _RiskState extends State<RiskCalculator> {
         metricRisks[_pageNumber]._medRiskVotes--;
       }
     } else if (level == 3) {
-      if (metricRisks[_pageNumber]._lowRiskVotes > 0) {
+      if (metricRisks[_pageNumber]._highRiskVotes > 0) {
         metricRisks[_pageNumber]._highRiskVotes--;
       }
     }
+    metricRisks[_pageNumber].calcRisk();
+    calculateState();
     setState(() {});
   }
 
@@ -510,6 +515,8 @@ class _RiskState extends State<RiskCalculator> {
     } else if (level == 3) {
       metricRisks[_pageNumber]._highRiskVotes++;
     }
+    metricRisks[_pageNumber].calcRisk();
+    calculateState();
     setState(() {});
   }
 
@@ -603,9 +610,8 @@ class _RiskState extends State<RiskCalculator> {
     return toRet;
   }
 
-  void nextPage()
-  {
-    if(_pageNumber<metricRisks.length-1){
+  void nextPage() {
+    if (_pageNumber < metricRisks.length - 1) {
       _pageNumber++;
       getCurrentPageIndicators;
       if(_pageNumber==metricRisks.length-1){
@@ -619,23 +625,19 @@ class _RiskState extends State<RiskCalculator> {
     }
     else{
       _homePage = !_homePage;
-      _pageNumber=0;
-      setState(() {
-      });
+      _pageNumber = 0;
+      setState(() {});
     }
   }
-  void previousPage()
-  {
-    if(_pageNumber>0){
+
+  void previousPage() {
+    if (_pageNumber > 0) {
       _pageNumber--;
       getCurrentPageIndicators;
-      setState(() {
-      });
-    }
-    else{
+      setState(() {});
+    } else {
       _homePage = !_homePage;
-      setState(() {
-      });
+      setState(() {});
     }
   }
 }
