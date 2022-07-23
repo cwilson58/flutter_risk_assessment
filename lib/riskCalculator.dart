@@ -15,6 +15,8 @@ class _RiskState extends State<RiskCalculator> {
   String _stringState = "Red";
   int _pageNumber = 0;
 
+  String assessSubmitString = "Next";
+
   //need a list of metric risks
   List<Metric> metricRisks = [];
   _RiskState() {
@@ -74,6 +76,7 @@ class _RiskState extends State<RiskCalculator> {
   bool _homePage = true;
   void _sethomePage() {
     setState(() {
+      assessSubmitString = "Next";
       _homePage = !_homePage;
     });
   }
@@ -244,7 +247,7 @@ class _RiskState extends State<RiskCalculator> {
                                       child: Center(
                                         child: RichText(
                                           text: const TextSpan(
-                                              text: "Total Risk:",
+                                              text: "Metric Risk:",
                                               style: TextStyle(
                                                 color: Color(0xFF000000),
                                                 fontSize: 48,
@@ -419,9 +422,9 @@ class _RiskState extends State<RiskCalculator> {
                           backgroundColor: MaterialStateProperty.all<Color>(
                               Colors.blue.shade800),
                         ),
-                        child: const Text(
-                          "Submit",
-                          style: TextStyle(
+                        child: Text(
+                          assessSubmitString,
+                          style: const TextStyle(
                             color: Color(0xFFFFFFFF),
                             fontSize: 16,
                           ),
@@ -434,6 +437,8 @@ class _RiskState extends State<RiskCalculator> {
         ),
       ),
     );
+
+
   }
 
   List<Widget> getRiskTitleList() {
@@ -567,26 +572,34 @@ class _RiskState extends State<RiskCalculator> {
 
   List<Widget> getCurrentPageIndicators() {
     List<Widget> toRet = [];
-    toRet.add(Text(metricRisks[_pageNumber]._noRiskName,
-        style: const TextStyle(
-          color: Color(0xFF000000),
-          fontSize: 52,
-        )));
-    toRet.add(Text(metricRisks[_pageNumber]._lowRiskName,
-        style: const TextStyle(
-          color: Color(0xFF000000),
-          fontSize: 52,
-        )));
-    toRet.add(Text(metricRisks[_pageNumber]._medRiskName,
-        style: const TextStyle(
-          color: Color(0xFF000000),
-          fontSize: 52,
-        )));
-    toRet.add(Text(metricRisks[_pageNumber]._highRiskName,
-        style: const TextStyle(
-          color: Color(0xFF000000),
-          fontSize: 52,
-        )));
+    toRet.add(FittedBox(
+      child: Text(metricRisks[_pageNumber]._noRiskName,
+          style: const TextStyle(
+            color: Color(0xFF000000),
+            fontSize: 52,
+          )),
+    ));
+    toRet.add(FittedBox(
+      child: Text(metricRisks[_pageNumber]._lowRiskName,
+          style: const TextStyle(
+            color: Color(0xFF000000),
+            fontSize: 52,
+          )),
+    ));
+    toRet.add(FittedBox(
+      child: Text(metricRisks[_pageNumber]._medRiskName,
+          style: const TextStyle(
+            color: Color(0xFF000000),
+            fontSize: 52,
+          )),
+    ));
+    toRet.add(FittedBox(
+      child: Text(metricRisks[_pageNumber]._highRiskName,
+          style: const TextStyle(
+            color: Color(0xFF000000),
+            fontSize: 52,
+          )),
+    ));
     return toRet;
   }
 
@@ -595,6 +608,12 @@ class _RiskState extends State<RiskCalculator> {
     if(_pageNumber<metricRisks.length-1){
       _pageNumber++;
       getCurrentPageIndicators;
+      if(_pageNumber==metricRisks.length-1){
+        assessSubmitString = "Submit";
+      }
+      else{
+        assessSubmitString = "Next";
+      }
       setState(() {
       });
     }
