@@ -12,6 +12,8 @@ class _RiskState extends State<RiskCalculator> {
   static Color yellow = Color.fromARGB(255, 238, 255, 0);
 
   Color _colourState = red;
+  String _stringState = "Red";
+
   //need a list of metric risks
   List<Metric> metricRisks = [];
   _RiskState() {
@@ -27,10 +29,13 @@ class _RiskState extends State<RiskCalculator> {
     totalRisk = totalRisk / votes;
     if (totalRisk < 0.3333) {
       _colourState = green;
+      _stringState = "Green";
     } else if (totalRisk < 0.6666) {
       _colourState = yellow;
+      _stringState = "Yellow";
     } else {
       _colourState = red;
+      _stringState = "Red";
     }
     setState(() {});
   }
@@ -67,17 +72,17 @@ class _RiskState extends State<RiskCalculator> {
           ),
         ),
         title: RichText(
-          text: const TextSpan(
+          text: TextSpan(
               text: "Total Risk:",
-              style: TextStyle(
+              style: const TextStyle(
                 color: Color(0xFFFFFFFF),
                 fontSize: 48,
               ),
               children: <TextSpan>[
                 TextSpan(
-                    text: "Green",
+                    text: _stringState,
                     style: TextStyle(
-                      color: Color(0xFF01B100),
+                      color: _colourState,
                       fontSize: 48,
                     ))
               ]),
@@ -185,7 +190,67 @@ class _RiskState extends State<RiskCalculator> {
                         ],
                       ),
                     ),
-                    Visibility(visible: !_homePage, child: Text("Hello"))
+                    Visibility(
+                        visible: !_homePage,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                                width: mainWindowWidth * 0.75,
+                                height: appHeight * 0.1,
+                                child: Center(
+                                  child: RichText(
+                                    text: const TextSpan(
+                                        text: "Total Risk:",
+                                        style: TextStyle(
+                                          color: Color(0xFF000000),
+                                          fontSize: 48,
+                                        ),
+                                        children: <TextSpan>[
+                                          TextSpan(
+                                              text: "Yellow",
+                                              style: TextStyle(
+                                                  color: Color(0xFFFFFF00),
+                                                  fontSize: 48,
+                                                  shadows: [
+                                                    Shadow(
+                                                        offset:
+                                                            Offset(-1.5, -1.5),
+                                                        color: Colors.black),
+                                                    Shadow(
+                                                        offset:
+                                                            Offset(1.5, -1.5),
+                                                        color: Colors.black),
+                                                    Shadow(
+                                                        offset:
+                                                            Offset(1.5, 1.5),
+                                                        color: Colors.black),
+                                                    Shadow(
+                                                        offset:
+                                                            Offset(-1.5, 1.5),
+                                                        color: Colors.black),
+                                                  ]))
+                                        ]),
+                                  ),
+                                )),
+                            const Divider(
+                              height: 5,
+                              color: Color(0xFF000000),
+                              thickness: 5,
+                            ),
+                            Container(
+                                width: mainWindowWidth * 0.25,
+                                height: appHeight * 0.1,
+                                child: const Center(
+                                  child: Text(
+                                    "EDIT",
+                                    style: TextStyle(
+                                      color: Color(0xFF000000),
+                                      fontSize: 52,
+                                    ),
+                                  ),
+                                ))
+                          ],
+                        )),
                   ],
                 )),
             Visibility(
@@ -267,13 +332,13 @@ class _RiskState extends State<RiskCalculator> {
 
 class Metric {
   double _risk = 0.0;
-  String? _noRiskName;
+  String _noRiskName = "";
   int _noRiskVotes = 0;
-  String? _lowRiskName;
+  String _lowRiskName = "";
   int _lowRiskVotes = 0;
-  String? _medRiskName;
+  String _medRiskName = "";
   int _medRiskVotes = 0;
-  String? _highRiskName;
+  String _highRiskName = "";
   int _highRiskVotes = 0;
   String metricName = "Edit this metric!";
   Metric() {}
