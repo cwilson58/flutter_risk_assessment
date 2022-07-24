@@ -407,6 +407,7 @@ class RiskState extends State<RiskCalculator> {
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Colors.blue.shade800),
                     ),
+                    key: const Key('AssessButton'),
                     child: const Text(
                       "Assess",
                       style: TextStyle(

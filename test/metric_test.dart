@@ -7,9 +7,9 @@ import 'package:risk_assessment/main.dart';
 import 'package:risk_assessment/riskCalculator.dart';
 
 void main() {
-  test('metric risk is zero', () {
+  test('metric risk is default', () {
     Metric metric = Metric();
-    expect(metric.getRisk(), 0.0);
+    expect(metric.getRisk(), 1.0);
   });
 
   test('metric risk is <1/3', () {
