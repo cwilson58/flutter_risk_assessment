@@ -16,7 +16,6 @@ void main() {
       (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
-
     // Verify that our app has started and the button exists
     //expect(find.byKey(Key('AssessButton')), findsOneWidget);
 
@@ -41,16 +40,32 @@ void main() {
     await tester.tap(find.byKey(const Key('NoInc')));
     await tester.pump();
     //confirm that we are in the green
-    //expect(find.text('Metric Risk: Green', findRichText: true).hitTestable(),findsOneWidget);
+    //Code from https://stackoverflow.com/questions/65885970/flutter-how-to-get-properly-richtext-data-when-testing
+    final richText0Finder = find.byKey(
+      ValueKey('RiskColour'),
+    );
+    final richText0Widget = tester.element(richText0Finder).widget as RichText;
+    expect(((richText0Widget.text as TextSpan).children?[0] as TextSpan).text,
+        'Green');
     //tap no risk -
     await tester.tap(find.byKey(const Key('NoDec')));
     await tester.pump();
     //confirm we are back to red
-
+    final richText1Finder = find.byKey(
+      ValueKey('RiskColour'),
+    );
+    final richText1Widget = tester.element(richText1Finder).widget as RichText;
+    expect(((richText1Widget.text as TextSpan).children?[0] as TextSpan).text,
+        'Red');
     //repeat for yellow state
     await tester.tap(find.byKey(const Key('LowInc')));
     await tester.pump();
-    //expect(find.text('Yellow', findRichText: true).hitTestable(), findsOneWidget);
+    final richText2Finder = find.byKey(
+      ValueKey('RiskColour'),
+    );
+    final richText2Widget = tester.element(richText2Finder).widget as RichText;
+    expect(((richText2Widget.text as TextSpan).children?[0] as TextSpan).text,
+        'Yellow');
     await tester.tap(find.byKey(const Key('LowDec')));
     await tester.pump();
   });
@@ -95,5 +110,11 @@ void main() {
     await tester.pump();
 
     //check that the state is YELLOW
+    final richText2Finder = find.byKey(
+      ValueKey('TotalRisk'),
+    );
+    final richText2Widget = tester.element(richText2Finder).widget as RichText;
+    expect(((richText2Widget.text as TextSpan).children?[0] as TextSpan).text,
+        'Yellow');
   });
 }

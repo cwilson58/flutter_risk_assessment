@@ -115,7 +115,8 @@ class RiskState extends State<RiskCalculator> {
         title: FittedBox(
           alignment: Alignment.center,
           child: RichText(
-            text: TextSpan(
+            key: const Key('TotalRisk'),
+            text: TextSpan( 
                 text: "Total Risk:",
                 style: const TextStyle(
                   color: Color(0xFFFFFFFF),
