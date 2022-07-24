@@ -151,6 +151,7 @@ class RiskState extends State<RiskCalculator> {
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
           //mainAxisAlignment: MainAxisAlignment.center,
+          padding:EdgeInsets.only(left:mainWindowWidth*0.085,right:mainWindowWidth*0.085),
           children: <Widget>[
             Container(
                 width: mainWindowWidth,
