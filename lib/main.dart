@@ -42,14 +42,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool _homePage = true;
-
-  void _sethomePage() {
-    setState(() {
-      _homePage = !_homePage;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

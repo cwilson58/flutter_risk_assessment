@@ -396,8 +396,8 @@ class _RiskState extends State<RiskCalculator> {
               child: Container(
                 margin: const EdgeInsets.only(bottom: 20),
                 child: SizedBox(
-                  width: appWidth * 0.2,
-                  height: 50,
+                  width: appWidth * 0.1,
+                  height: 24,
                   child: TextButton(
                     onPressed: _sethomePage,
                     style: ButtonStyle(
@@ -425,8 +425,8 @@ class _RiskState extends State<RiskCalculator> {
                     alignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       SizedBox(
-                        width: appWidth * 0.2,
-                        height: 50,
+                        width: appWidth * 0.1,
+                        height: 24,
                         child: TextButton(
                           onPressed: previousPage,
                           style: ButtonStyle(
@@ -445,8 +445,8 @@ class _RiskState extends State<RiskCalculator> {
                         ),
                       ),
                       SizedBox(
-                        width: appWidth * 0.2,
-                        height: 50,
+                        width: appWidth * 0.1,
+                        height: 24,
                         child: TextButton(
                           onPressed: nextPage,
                           style: ButtonStyle(
@@ -465,8 +465,9 @@ class _RiskState extends State<RiskCalculator> {
                         ),
                       ),
                       Container(
+                          height: 30,
                           child: Text(assessPagesText,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Color(0xFFFFFFFF), fontSize: 32)))
                     ],
                   ),
