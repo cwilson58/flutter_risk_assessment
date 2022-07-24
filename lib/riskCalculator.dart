@@ -135,7 +135,7 @@ class RiskState extends State<RiskCalculator> {
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-        child: Column(
+        child: ListView(
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
@@ -150,7 +150,7 @@ class RiskState extends State<RiskCalculator> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+          //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
                 width: mainWindowWidth,
@@ -179,7 +179,7 @@ class RiskState extends State<RiskCalculator> {
                                 children: <Widget>[
                                   Container(
                                       width: mainWindowWidth * 0.75,
-                                      height: appHeight * 0.1,
+                                      height: mainWindowHeight * 0.1,
                                       child: const Center(
                                         child: FittedBox(
                                           child: Text(
@@ -199,10 +199,10 @@ class RiskState extends State<RiskCalculator> {
                                   //left column data
                                   Container(
                                     width: mainWindowWidth * 0.75,
-                                    height: appHeight * 0.7 - 5,
+                                    height: mainWindowHeight * 0.9 - 5,
                                     child: Column(
                                       children:
-                                          getRiskTitleList(appHeight * 0.7 - 5),
+                                          getRiskTitleList(mainWindowHeight * 0.9 - 5),
                                     ),
                                   ),
                                 ],
@@ -219,7 +219,7 @@ class RiskState extends State<RiskCalculator> {
                               child: Column(children: <Widget>[
                                 Container(
                                     width: mainWindowWidth * 0.25,
-                                    height: appHeight * 0.1,
+                                    height: mainWindowHeight * 0.1,
                                     child: const Center(
                                       child: FittedBox(
                                         child: Text(
@@ -238,10 +238,10 @@ class RiskState extends State<RiskCalculator> {
                                 ),
                                 Container(
                                   width: mainWindowWidth * 0.25,
-                                  height: appHeight * 0.7 - 5,
+                                  height: mainWindowHeight * 0.9 - 5,
                                   child: Column(
                                     children:
-                                        getRiskColourList(appHeight * 0.7 - 5),
+                                        getRiskColourList(mainWindowHeight * 0.9 - 5),
                                   ),
                                 ),
                               ])),
@@ -437,11 +437,13 @@ class RiskState extends State<RiskCalculator> {
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 Colors.blue.shade800),
                           ),
-                          child: Text(
-                            assessPreviousString,
-                            style: const TextStyle(
-                              color: Color(0xFFFFFFFF),
-                              fontSize: 16,
+                          child: FittedBox(
+                            child: Text(
+                              assessPreviousString,
+                              style: const TextStyle(
+                                color: Color(0xFFFFFFFF),
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         ),
@@ -744,8 +746,8 @@ class RiskState extends State<RiskCalculator> {
     ));
     toRet.add(Container(
       height: containerHeight * 0.25 - 2,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: ListView(
+        //mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(metricRisks[_pageNumber]._noRiskName,
               style: const TextStyle(
@@ -762,8 +764,8 @@ class RiskState extends State<RiskCalculator> {
     ));
     toRet.add(Container(
       height: containerHeight * 0.25 - 2,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: ListView(
+        //mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(metricRisks[_pageNumber]._lowRiskName,
               style: const TextStyle(
@@ -780,8 +782,8 @@ class RiskState extends State<RiskCalculator> {
     ));
     toRet.add(Container(
       height: containerHeight * 0.25 - 2,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: ListView(
+       // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(metricRisks[_pageNumber]._medRiskName,
               style: const TextStyle(
@@ -798,8 +800,8 @@ class RiskState extends State<RiskCalculator> {
     ));
     toRet.add(Container(
       height: containerHeight * 0.25 - 2,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: ListView(
+        //mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(metricRisks[_pageNumber]._highRiskName,
               style: const TextStyle(

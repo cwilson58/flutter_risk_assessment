@@ -11,13 +11,12 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return 
-    MaterialApp(
+    return MaterialApp(
       title: 'Metrics Calculator',
       theme: ThemeData(
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: const Color(0xFF515151)),
-      home: RiskCalculator(),
+      home: const MyHomePage(title: 'Project Name'),
     );
   }
 }
@@ -43,15 +42,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-
-    return Scaffold(body: Container(child: RiskCalculator()));
+    return Scaffold(
+      body:Container(child: RiskCalculator())
+    );
   }
 }
