@@ -588,6 +588,7 @@ class RiskState extends State<RiskCalculator> {
           Container(
             width: containerWidth * 0.25,
             child: TextButton(
+              key: const Key('NoDec'),
               onPressed: () => decrementVote(0),
               child: const Text(
                 "-",
@@ -602,6 +603,7 @@ class RiskState extends State<RiskCalculator> {
           Container(
             width: containerWidth * 0.25,
             child: TextButton(
+              key: const Key('NoInc'),
               onPressed: () => incrementVote(0),
               child: const Text(
                 "+",
@@ -625,6 +627,7 @@ class RiskState extends State<RiskCalculator> {
           Container(
             width: containerWidth * 0.25,
             child: TextButton(
+              key: const Key('LowDec'),
               onPressed: () => decrementVote(1),
               child: const Text(
                 "-",
@@ -639,6 +642,7 @@ class RiskState extends State<RiskCalculator> {
           Container(
             width: containerWidth * 0.25,
             child: TextButton(
+              key: const Key('LowInc'),
               onPressed: () => incrementVote(1),
               child: const Text(
                 "+",
@@ -662,6 +666,7 @@ class RiskState extends State<RiskCalculator> {
           Container(
             width: containerWidth * 0.25,
             child: TextButton(
+              key: const Key('MedDec'),
               onPressed: () => decrementVote(2),
               child: const Text(
                 "-",
@@ -676,6 +681,7 @@ class RiskState extends State<RiskCalculator> {
           Container(
             width: containerWidth * 0.25,
             child: TextButton(
+              key: const Key('MedInc'),
               onPressed: () => incrementVote(2),
               child: const Text(
                 "+",
@@ -699,6 +705,7 @@ class RiskState extends State<RiskCalculator> {
           Container(
             width: containerWidth * 0.25,
             child: TextButton(
+              key: const Key('HighDec'),
               onPressed: () => decrementVote(3),
               child: const Text(
                 "-",
@@ -713,6 +720,7 @@ class RiskState extends State<RiskCalculator> {
           Container(
             width: containerWidth * 0.25,
             child: TextButton(
+              key: const Key('HighInc'),
               onPressed: () => incrementVote(3),
               child: const Text(
                 "+",
