@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class RiskCalculator extends StatefulWidget {
   @override
-  _RiskState createState() => _RiskState();
+  RiskState createState() => RiskState();
 }
 
-class _RiskState extends State<RiskCalculator> {
+class RiskState extends State<RiskCalculator> {
   //The state of the risk as a colour
   static Color red = const Color.fromARGB(255, 255, 0, 0);
   static Color green = const Color.fromARGB(255, 0, 255, 0);
@@ -20,7 +20,7 @@ class _RiskState extends State<RiskCalculator> {
 
   //need a list of metric risks
   List<Metric> metricRisks = [];
-  _RiskState() {
+  RiskState() {
     //Phase one hardcoded values
     metricRisks.add(Metric.param(
         "The Total Number of Defects",
@@ -53,6 +53,7 @@ class _RiskState extends State<RiskCalculator> {
         "At least one major integration problem, with a plan to remedy",
         "Multiple major integration problems with no plans to remedy"));
   }
+
   void calculateState() {
     double totalRisk = 0.0;
     metricRisks.forEach((item) {
@@ -406,6 +407,7 @@ class _RiskState extends State<RiskCalculator> {
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Colors.blue.shade800),
                     ),
+                    key: const Key('AssessButton'),
                     child: const Text(
                       "Assess",
                       style: TextStyle(
