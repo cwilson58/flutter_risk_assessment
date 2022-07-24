@@ -15,7 +15,8 @@ class RiskState extends State<RiskCalculator> {
   String _stringState = "Red";
   int _pageNumber = 0;
 
-  String assessSubmitString = "Next";
+  String assessNextString = "Next";
+  String assessPreviousString = "Leave";
 
   //need a list of metric risks
   List<Metric> metricRisks = [];
@@ -42,9 +43,9 @@ class RiskState extends State<RiskCalculator> {
     metricRisks.add(Metric.param(
         "Implementation Progress",
         "The implementation is ahead of schedule",
-        "the implementation is on schedule",
-        "the implementation is slightly behind schedule",
-        "the implementation is far behind schedule"));
+        "The implementation is on schedule",
+        "The implementation is slightly behind schedule",
+        "The implementation is far behind schedule"));
     metricRisks.add(Metric.param(
         "Integration Progress",
         "No major integration problems detected",
@@ -75,7 +76,8 @@ class RiskState extends State<RiskCalculator> {
   bool _homePage = true;
   void _sethomePage() {
     setState(() {
-      assessSubmitString = "Next";
+      assessNextString = "Next";
+      assessPreviousString = "Leave";
       _homePage = !_homePage;
     });
   }
@@ -90,6 +92,9 @@ class RiskState extends State<RiskCalculator> {
     double mainWindowWidth = appWidth * 0.85;
     double mainWindowHeight = appHeight * 0.8;
 
+    String assessPagesText =
+        (_pageNumber + 1).toString() + "/" + metricRisks.length.toString();
+
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -97,28 +102,34 @@ class RiskState extends State<RiskCalculator> {
         centerTitle: true,
         leadingWidth: 600,
         backgroundColor: const Color(0xFF08006A),
-        leading: const Text(
-          "Project Name",
-          style: TextStyle(
-            color: Color(0xFFFFFFFF),
-            fontSize: 48,
+        leading: const FittedBox(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            "Project Name",
+            style: TextStyle(
+              color: Color(0xFFFFFFFF),
+              fontSize: 48,
+            ),
           ),
         ),
-        title: RichText(
-          text: TextSpan(
-              text: "Total Risk:",
-              style: const TextStyle(
-                color: Color(0xFFFFFFFF),
-                fontSize: 48,
-              ),
-              children: <TextSpan>[
-                TextSpan(
-                    text: _stringState,
-                    style: TextStyle(
-                      color: _colourState,
-                      fontSize: 48,
-                    ))
-              ]),
+        title: FittedBox(
+          alignment: Alignment.center,
+          child: RichText(
+            text: TextSpan(
+                text: "Total Risk:",
+                style: const TextStyle(
+                  color: Color(0xFFFFFFFF),
+                  fontSize: 48,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                      text: _stringState,
+                      style: TextStyle(
+                        color: _colourState,
+                        fontSize: 48,
+                      ))
+                ]),
+          ),
         ),
       ),
       body: Center(
@@ -170,11 +181,13 @@ class RiskState extends State<RiskCalculator> {
                                       width: mainWindowWidth * 0.75,
                                       height: appHeight * 0.1,
                                       child: const Center(
-                                        child: Text(
-                                          "Metric Description",
-                                          style: TextStyle(
-                                            color: Color(0xFF000000),
-                                            fontSize: 64,
+                                        child: FittedBox(
+                                          child: Text(
+                                            "Metric Description",
+                                            style: TextStyle(
+                                              color: Color(0xFF000000),
+                                              fontSize: 64,
+                                            ),
                                           ),
                                         ),
                                       )),
@@ -188,7 +201,8 @@ class RiskState extends State<RiskCalculator> {
                                     width: mainWindowWidth * 0.75,
                                     height: appHeight * 0.7 - 5,
                                     child: Column(
-                                      children: getRiskTitleList(),
+                                      children:
+                                          getRiskTitleList(appHeight * 0.7 - 5),
                                     ),
                                   ),
                                 ],
@@ -207,11 +221,13 @@ class RiskState extends State<RiskCalculator> {
                                     width: mainWindowWidth * 0.25,
                                     height: appHeight * 0.1,
                                     child: const Center(
-                                      child: Text(
-                                        "COLOUR",
-                                        style: TextStyle(
-                                          color: Color(0xFF000000),
-                                          fontSize: 52,
+                                      child: FittedBox(
+                                        child: Text(
+                                          "Colour",
+                                          style: TextStyle(
+                                            color: Color(0xFF000000),
+                                            fontSize: 64,
+                                          ),
                                         ),
                                       ),
                                     )),
@@ -224,7 +240,8 @@ class RiskState extends State<RiskCalculator> {
                                   width: mainWindowWidth * 0.25,
                                   height: appHeight * 0.7 - 5,
                                   child: Column(
-                                    children: getRiskColourList(),
+                                    children:
+                                        getRiskColourList(appHeight * 0.7 - 5),
                                   ),
                                 ),
                               ])),
@@ -246,7 +263,7 @@ class RiskState extends State<RiskCalculator> {
                                       child: Center(
                                         child: RichText(
                                           text: TextSpan(
-                                              text: "Total Risk:",
+                                              text: "Metric Risk:",
                                               style: const TextStyle(
                                                 color: Color(0xFF000000),
                                                 fontSize: 48,
@@ -295,11 +312,13 @@ class RiskState extends State<RiskCalculator> {
                                       width: mainWindowWidth * 0.15 - 5,
                                       height: mainWindowHeight * 0.1,
                                       child: const Center(
-                                        child: Text(
-                                          "EDIT",
-                                          style: TextStyle(
-                                            color: Color(0xFF000000),
-                                            fontSize: 52,
+                                        child: FittedBox(
+                                          child: Text(
+                                            "Edit",
+                                            style: TextStyle(
+                                              color: Color(0xFF000000),
+                                              fontSize: 52,
+                                            ),
                                           ),
                                         ),
                                       ))
@@ -318,23 +337,27 @@ class RiskState extends State<RiskCalculator> {
                                   Container(
                                       width: mainWindowWidth * 0.75,
                                       height: mainWindowHeight * 0.1,
-                                      child: const Center(
-                                          child: Text(
-                                        "Risk Name",
-                                        style: TextStyle(
-                                          color: Color(0xFF000000),
-                                          fontSize: 52,
+                                      child: Center(
+                                          child: FittedBox(
+                                        child: Text(
+                                          metricRisks[_pageNumber].metricName,
+                                          style: const TextStyle(
+                                            color: Color(0xFF000000),
+                                            fontSize: 52,
+                                          ),
                                         ),
                                       ))),
                                   Container(
                                       width: mainWindowWidth * 0.25,
                                       height: mainWindowHeight * 0.1,
                                       child: const Center(
-                                        child: Text(
-                                          "Votes",
-                                          style: TextStyle(
-                                            color: Color(0xFF000000),
-                                            fontSize: 52,
+                                        child: FittedBox(
+                                          child: Text(
+                                            "Votes",
+                                            style: TextStyle(
+                                              color: Color(0xFF000000),
+                                              fontSize: 52,
+                                            ),
                                           ),
                                         ),
                                       ))
@@ -358,7 +381,8 @@ class RiskState extends State<RiskCalculator> {
                                       height: mainWindowHeight * 0.8 - 21,
                                       child: Center(
                                           child: Column(
-                                        children: getPageVotes(mainWindowWidth,
+                                        children: getPageVotes(
+                                            mainWindowWidth * 0.25,
                                             mainWindowHeight * 0.8 - 21),
                                       ))),
                                 ],
@@ -370,23 +394,25 @@ class RiskState extends State<RiskCalculator> {
                 )),
             Visibility(
               visible: _homePage,
-              child: SizedBox(
-                width: appWidth * 0.2,
-                height: 50,
-                child: TextButton(
-                  onPressed: _sethomePage,
-                  style: ButtonStyle(
-                    foregroundColor:
-                        MaterialStateProperty.all<Color>(Colors.white),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.blue.shade800),
-                  ),
-                  key: const Key('AssessButton'),
-                  child: const Text(
-                    "Assess",
-                    style: TextStyle(
-                      color: Color(0xFFFFFFFF),
-                      fontSize: 16,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                child: SizedBox(
+                  width: appWidth * 0.1,
+                  height: 24,
+                  child: TextButton(
+                    onPressed: _sethomePage,
+                    style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.white),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Colors.blue.shade800),
+                    ),
+                    child: const Text(
+                      "Assess",
+                      style: TextStyle(
+                        color: Color(0xFFFFFFFF),
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
@@ -394,50 +420,58 @@ class RiskState extends State<RiskCalculator> {
             ),
             Visibility(
                 visible: !_homePage,
-                child: ButtonBar(
-                  alignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    SizedBox(
-                      width: appWidth * 0.2,
-                      height: 50,
-                      child: TextButton(
-                        onPressed: previousPage,
-                        style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.blue.shade800),
-                        ),
-                        child: const Text(
-                          "Previous",
-                          style: TextStyle(
-                            color: Color(0xFFFFFFFF),
-                            fontSize: 16,
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  child: ButtonBar(
+                    alignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      SizedBox(
+                        width: appWidth * 0.1,
+                        height: 24,
+                        child: TextButton(
+                          onPressed: previousPage,
+                          style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.blue.shade800),
+                          ),
+                          child: Text(
+                            assessPreviousString,
+                            style: const TextStyle(
+                              color: Color(0xFFFFFFFF),
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      width: appWidth * 0.2,
-                      height: 50,
-                      child: TextButton(
-                        onPressed: nextPage,
-                        style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(Colors.white),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.blue.shade800),
-                        ),
-                        child: Text(
-                          assessSubmitString,
-                          style: const TextStyle(
-                            color: Color(0xFFFFFFFF),
-                            fontSize: 16,
+                      SizedBox(
+                        width: appWidth * 0.1,
+                        height: 24,
+                        child: TextButton(
+                          onPressed: nextPage,
+                          style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all<Color>(Colors.white),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.blue.shade800),
+                          ),
+                          child: Text(
+                            assessNextString,
+                            style: const TextStyle(
+                              color: Color(0xFFFFFFFF),
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      Container(
+                          height: 30,
+                          child: Text(assessPagesText,
+                              style: const TextStyle(
+                                  color: Color(0xFFFFFFFF), fontSize: 32)))
+                    ],
+                  ),
                 )),
           ],
         ),
@@ -445,40 +479,57 @@ class RiskState extends State<RiskCalculator> {
     );
   }
 
-  List<Widget> getRiskTitleList() {
+  List<Widget> getRiskTitleList(double containerHeight) {
     List<Widget> toRet = [];
+    int listLength = metricRisks.length;
     metricRisks.forEach((element) {
-      toRet.add(Text(
-        element.metricName,
-        style: const TextStyle(
-          color: Color(0xFF000000),
-          fontSize: 48,
+      toRet.add(Container(
+        height: containerHeight / listLength - 2,
+        child: Text(
+          element.metricName,
+          style: const TextStyle(
+            color: Color(0xFF000000),
+            fontSize: 48,
+          ),
         ),
       ));
-      toRet.add(const Divider(
-        height: 2,
-        color: Color(0xFF000000),
-        thickness: 2,
-      ));
+      if (metricRisks.last != element) {
+        toRet.add(const Divider(
+          height: 2,
+          color: Color(0xFF000000),
+          thickness: 2,
+        ));
+      }
     });
     return toRet;
   }
 
-  List<Widget> getRiskColourList() {
+  List<Widget> getRiskColourList(double containerHeight) {
     List<Widget> toRet = [];
+    int listLength = metricRisks.length;
     metricRisks.forEach((element) {
-      toRet.add(Text(
-        element.riskColourName,
-        style: TextStyle(
-          color: element.riskColour,
-          fontSize: 48,
+      toRet.add(Container(
+        height: containerHeight / listLength - 2,
+        child: Text(
+          element.riskColourName,
+          style: TextStyle(
+              color: element.riskColour,
+              fontSize: 48,
+              shadows: const [
+                Shadow(offset: Offset(-1.5, -1.5), color: Colors.black),
+                Shadow(offset: Offset(1.5, -1.5), color: Colors.black),
+                Shadow(offset: Offset(1.5, 1.5), color: Colors.black),
+                Shadow(offset: Offset(-1.5, 1.5), color: Colors.black),
+              ]),
         ),
       ));
-      toRet.add(const Divider(
-        height: 2,
-        color: Color(0xFF000000),
-        thickness: 2,
-      ));
+      if (metricRisks.last != element) {
+        toRet.add(const Divider(
+          height: 2,
+          color: Color(0xFF000000),
+          thickness: 2,
+        ));
+      }
     });
     return toRet;
   }
@@ -523,19 +574,39 @@ class RiskState extends State<RiskCalculator> {
 
   List<Widget> getPageVotes(double containerWidth, double containerHeight) {
     List<Widget> toRet = [];
+    toRet.add(const Divider(
+      height: 2,
+      color: Color(0xFF000000),
+      thickness: 2,
+    ));
     toRet.add(Container(
-      height: containerHeight * 0.25 - 1.5,
+      height: containerHeight * 0.25 - 2,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextButton(
-            onPressed: () => decrementVote(0),
-            child: const Text("-"),
+          Container(
+            width: containerWidth * 0.25,
+            child: TextButton(
+              onPressed: () => decrementVote(0),
+              child: const Text(
+                "-",
+                style: TextStyle(fontSize: 32),
+              ),
+            ),
           ),
-          Text(metricRisks[_pageNumber]._noRiskVotes.toString()),
-          TextButton(
-            onPressed: () => incrementVote(0),
-            child: const Text("+"),
+          Text(
+            metricRisks[_pageNumber]._noRiskVotes.toString(),
+            style: const TextStyle(fontSize: 32),
+          ),
+          Container(
+            width: containerWidth * 0.25,
+            child: TextButton(
+              onPressed: () => incrementVote(0),
+              child: const Text(
+                "+",
+                style: TextStyle(fontSize: 32),
+              ),
+            ),
           ),
         ],
       ),
@@ -546,18 +617,33 @@ class RiskState extends State<RiskCalculator> {
       thickness: 2,
     ));
     toRet.add(Container(
-      height: containerHeight * 0.25 - 1.5,
+      height: containerHeight * 0.25 - 2,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextButton(
-            onPressed: () => decrementVote(1),
-            child: const Text("-"),
+          Container(
+            width: containerWidth * 0.25,
+            child: TextButton(
+              onPressed: () => decrementVote(1),
+              child: const Text(
+                "-",
+                style: TextStyle(fontSize: 32),
+              ),
+            ),
           ),
-          Text(metricRisks[_pageNumber]._lowRiskVotes.toString()),
-          TextButton(
-            onPressed: () => incrementVote(1),
-            child: const Text("+"),
+          Text(
+            metricRisks[_pageNumber]._lowRiskVotes.toString(),
+            style: const TextStyle(fontSize: 32),
+          ),
+          Container(
+            width: containerWidth * 0.25,
+            child: TextButton(
+              onPressed: () => incrementVote(1),
+              child: const Text(
+                "+",
+                style: TextStyle(fontSize: 32),
+              ),
+            ),
           ),
         ],
       ),
@@ -568,18 +654,33 @@ class RiskState extends State<RiskCalculator> {
       thickness: 2,
     ));
     toRet.add(Container(
-      height: containerHeight * 0.25 - 1.5,
+      height: containerHeight * 0.25 - 2,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextButton(
-            onPressed: () => decrementVote(2),
-            child: const Text("-"),
+          Container(
+            width: containerWidth * 0.25,
+            child: TextButton(
+              onPressed: () => decrementVote(2),
+              child: const Text(
+                "-",
+                style: TextStyle(fontSize: 32),
+              ),
+            ),
           ),
-          Text(metricRisks[_pageNumber]._medRiskVotes.toString()),
-          TextButton(
-            onPressed: () => incrementVote(2),
-            child: const Text("+"),
+          Text(
+            metricRisks[_pageNumber]._medRiskVotes.toString(),
+            style: const TextStyle(fontSize: 32),
+          ),
+          Container(
+            width: containerWidth * 0.25,
+            child: TextButton(
+              onPressed: () => incrementVote(2),
+              child: const Text(
+                "+",
+                style: TextStyle(fontSize: 32),
+              ),
+            ),
           ),
         ],
       ),
@@ -590,18 +691,33 @@ class RiskState extends State<RiskCalculator> {
       thickness: 2,
     ));
     toRet.add(Container(
-      height: containerHeight * 0.25 - 1.5,
+      height: containerHeight * 0.25 - 2,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextButton(
-            onPressed: () => decrementVote(3),
-            child: const Text("-"),
+          Container(
+            width: containerWidth * 0.25,
+            child: TextButton(
+              onPressed: () => decrementVote(3),
+              child: const Text(
+                "-",
+                style: TextStyle(fontSize: 32),
+              ),
+            ),
           ),
-          Text(metricRisks[_pageNumber]._highRiskVotes.toString()),
-          TextButton(
-            onPressed: () => incrementVote(3),
-            child: const Text("+"),
+          Text(
+            metricRisks[_pageNumber]._highRiskVotes.toString(),
+            style: const TextStyle(fontSize: 32),
+          ),
+          Container(
+            width: containerWidth * 0.25,
+            child: TextButton(
+              onPressed: () => incrementVote(3),
+              child: const Text(
+                "+",
+                style: TextStyle(fontSize: 32),
+              ),
+            ),
           ),
         ],
       ),
@@ -612,44 +728,76 @@ class RiskState extends State<RiskCalculator> {
   List<Widget> getCurrentPageIndicators(
       double containerWidth, double containerHeight) {
     List<Widget> toRet = [];
-    toRet.add(Container(
-      height: containerHeight * 0.25 - 1.5,
-      child: FittedBox(
-        child: Text(metricRisks[_pageNumber]._noRiskName,
-            style: const TextStyle(
-              color: Color(0xFF000000),
-              fontSize: 52,
-            )),
-      ),
+    toRet.add(const Divider(
+      height: 2,
+      color: Color(0xFF000000),
+      thickness: 2,
     ));
     toRet.add(Container(
-      height: containerHeight * 0.25 - 1.5,
-      child: FittedBox(
-        child: Text(metricRisks[_pageNumber]._lowRiskName,
-            style: const TextStyle(
-              color: Color(0xFF000000),
-              fontSize: 52,
-            )),
+      height: containerHeight * 0.25 - 2,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(metricRisks[_pageNumber]._noRiskName,
+              style: const TextStyle(
+                color: Color(0xFF000000),
+                fontSize: 32,
+              )),
+        ],
       ),
     ));
-    toRet.add(Container(
-      height: containerHeight * 0.25 - 1.5,
-      child: FittedBox(
-        child: Text(metricRisks[_pageNumber]._medRiskName,
-            style: const TextStyle(
-              color: Color(0xFF000000),
-              fontSize: 52,
-            )),
-      ),
+    toRet.add(const Divider(
+      height: 2,
+      color: Color(0xFF000000),
+      thickness: 2,
     ));
     toRet.add(Container(
-      height: containerHeight * 0.25 - 1.5,
-      child: FittedBox(
-        child: Text(metricRisks[_pageNumber]._highRiskName,
-            style: const TextStyle(
-              color: Color(0xFF000000),
-              fontSize: 52,
-            )),
+      height: containerHeight * 0.25 - 2,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(metricRisks[_pageNumber]._lowRiskName,
+              style: const TextStyle(
+                color: Color(0xFF000000),
+                fontSize: 32,
+              )),
+        ],
+      ),
+    ));
+    toRet.add(const Divider(
+      height: 2,
+      color: Color(0xFF000000),
+      thickness: 2,
+    ));
+    toRet.add(Container(
+      height: containerHeight * 0.25 - 2,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(metricRisks[_pageNumber]._medRiskName,
+              style: const TextStyle(
+                color: Color(0xFF000000),
+                fontSize: 32,
+              )),
+        ],
+      ),
+    ));
+    toRet.add(const Divider(
+      height: 2,
+      color: Color(0xFF000000),
+      thickness: 2,
+    ));
+    toRet.add(Container(
+      height: containerHeight * 0.25 - 2,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(metricRisks[_pageNumber]._highRiskName,
+              style: const TextStyle(
+                color: Color(0xFF000000),
+                fontSize: 32,
+              )),
+        ],
       ),
     ));
     return toRet;
@@ -659,11 +807,7 @@ class RiskState extends State<RiskCalculator> {
     if (_pageNumber < metricRisks.length - 1) {
       _pageNumber++;
       getCurrentPageIndicators;
-      if (_pageNumber == metricRisks.length - 1) {
-        assessSubmitString = "Submit";
-      } else {
-        assessSubmitString = "Next";
-      }
+      setButtonsText();
       setState(() {});
     } else {
       _homePage = !_homePage;
@@ -676,10 +820,24 @@ class RiskState extends State<RiskCalculator> {
     if (_pageNumber > 0) {
       _pageNumber--;
       getCurrentPageIndicators;
+      setButtonsText();
       setState(() {});
     } else {
       _homePage = !_homePage;
       setState(() {});
+    }
+  }
+
+  void setButtonsText() {
+    if (_pageNumber == 0) {
+      assessPreviousString = "Leave";
+    } else {
+      assessPreviousString = "Previous";
+    }
+    if (_pageNumber == metricRisks.length - 1) {
+      assessNextString = "Done";
+    } else {
+      assessNextString = "Next";
     }
   }
 }
