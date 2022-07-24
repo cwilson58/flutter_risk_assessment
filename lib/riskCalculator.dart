@@ -262,6 +262,7 @@ class RiskState extends State<RiskCalculator> {
                                       height: mainWindowHeight * 0.1,
                                       child: Center(
                                         child: RichText(
+                                          key: const Key('RiskColour'),
                                           text: TextSpan(
                                               text: "Metric Risk:",
                                               style: const TextStyle(
@@ -430,6 +431,7 @@ class RiskState extends State<RiskCalculator> {
                         width: appWidth * 0.1,
                         height: 24,
                         child: TextButton(
+                          key: const Key('PrevPage'),
                           onPressed: previousPage,
                           style: ButtonStyle(
                             foregroundColor:
@@ -450,6 +452,7 @@ class RiskState extends State<RiskCalculator> {
                         width: appWidth * 0.1,
                         height: 24,
                         child: TextButton(
+                          key: const Key('NextPage'),
                           onPressed: nextPage,
                           style: ButtonStyle(
                             foregroundColor:
