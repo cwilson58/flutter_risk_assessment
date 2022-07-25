@@ -117,4 +117,7 @@ void main() {
     expect(((richText2Widget.text as TextSpan).children?[0] as TextSpan).text,
         'Yellow');
   });
+  //Test for phase 2
+
+  //Not previously covered state tests
 }
