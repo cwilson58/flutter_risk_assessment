@@ -14,6 +14,8 @@ import 'package:risk_assessment/riskCalculator.dart';
 void main() {
   testWidgets('Assess button not visible during assessment',
       (WidgetTester tester) async {
+    tester.binding.window.devicePixelRatioTestValue = 1.0;
+    tester.binding.window.physicalSizeTestValue= Size(1920, 1080);
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
     // Verify that our app has started and the button exists
@@ -28,6 +30,8 @@ void main() {
   });
   testWidgets('Assess first page to Green or Yellow',
       (WidgetTester tester) async {
+    tester.binding.window.devicePixelRatioTestValue = 1.0;
+    tester.binding.window.physicalSizeTestValue= Size(1920, 1080);
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
     // Verify that our app has started and the button exists
@@ -71,6 +75,9 @@ void main() {
   });
   //Test page navigation
   testWidgets('Test Page Navigation', (WidgetTester tester) async {
+
+    tester.binding.window.devicePixelRatioTestValue = 1.0;
+    tester.binding.window.physicalSizeTestValue= Size(1920, 1080);
     await tester.pumpWidget(MyApp());
 
     await tester.tap(find.byKey(const Key('AssessButton')));
@@ -95,6 +102,9 @@ void main() {
   });
   //Test that total risk changes
   testWidgets('Total Risk Updates', (WidgetTester tester) async {
+
+    tester.binding.window.devicePixelRatioTestValue = 1.0;
+    tester.binding.window.physicalSizeTestValue= Size(1920, 1080);
     await tester.pumpWidget(MyApp());
 
     await tester.tap(find.byKey(const Key('AssessButton')));
