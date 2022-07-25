@@ -91,41 +91,34 @@ class RiskState extends State<RiskCalculator> {
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    
   }
 
   bool _isEditing = false;
   void _setEditMetric() {
     setState(() {
-      if(editButtonString=="Edit"){
+      if (editButtonString == "Edit") {
         _controllerMetricName.text = "";
         _controllerNoRisk.text = "";
         _controllerLowRisk.text = "";
         _controllerMedRisk.text = "";
         _controllerHighRisk.text = "";
         editButtonString = "Save";
-      }
-      else{
-        if(_controllerMetricName.text!="")
-        {
+      } else {
+        if (_controllerMetricName.text != "") {
           metricRisks[_pageNumber].metricName = _controllerMetricName.text;
         }
-        if(_controllerNoRisk.text!="")
-        {
+        if (_controllerNoRisk.text != "") {
           metricRisks[_pageNumber]._noRiskName = _controllerNoRisk.text;
         }
-        if(_controllerLowRisk.text!="")
-        {
+        if (_controllerLowRisk.text != "") {
           metricRisks[_pageNumber]._lowRiskName = _controllerLowRisk.text;
         }
-        if(_controllerMedRisk.text!="")
-        {
+        if (_controllerMedRisk.text != "") {
           metricRisks[_pageNumber]._medRiskName = _controllerMedRisk.text;
         }
-        if(_controllerHighRisk.text!="")
-        {
+        if (_controllerHighRisk.text != "") {
           metricRisks[_pageNumber]._highRiskName = _controllerHighRisk.text;
         }
         editButtonString = "Edit";
@@ -368,6 +361,7 @@ class RiskState extends State<RiskCalculator> {
                                     width: mainWindowWidth * 0.15 - 5,
                                     height: mainWindowHeight * 0.1,
                                     child: TextButton(
+                                      key: Key('EditButton'),
                                       style: ButtonStyle(
                                         foregroundColor:
                                             MaterialStateProperty.all<Color>(
@@ -416,6 +410,7 @@ class RiskState extends State<RiskCalculator> {
                                             width: mainWindowWidth * 0.75,
                                             height: mainWindowHeight * 0.1,
                                             child: TextField(
+                                              key: Key('MetricNameEditable'),
                                               controller: _controllerMetricName,
                                               decoration: InputDecoration(
                                                   hintText:
@@ -530,8 +525,8 @@ class RiskState extends State<RiskCalculator> {
                             key: const Key('PrevPage'),
                             onPressed: previousPage,
                             style: ButtonStyle(
-                              foregroundColor:
-                                  MaterialStateProperty.all<Color>(Colors.white),
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   Colors.blue.shade800),
                             ),
@@ -553,8 +548,8 @@ class RiskState extends State<RiskCalculator> {
                             key: const Key('NextPage'),
                             onPressed: nextPage,
                             style: ButtonStyle(
-                              foregroundColor:
-                                  MaterialStateProperty.all<Color>(Colors.white),
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
                               backgroundColor: MaterialStateProperty.all<Color>(
                                   Colors.blue.shade800),
                             ),
@@ -918,7 +913,8 @@ class RiskState extends State<RiskCalculator> {
           height: containerHeight * 0.25 - 2,
           alignment: Alignment.centerLeft,
           child: TextField(
-            controller:_controllerNoRisk,
+            key: Key('NoRiskEditable'),
+            controller: _controllerNoRisk,
             decoration:
                 InputDecoration(hintText: metricRisks[_pageNumber]._noRiskName),
           )),
@@ -933,7 +929,8 @@ class RiskState extends State<RiskCalculator> {
         height: containerHeight * 0.25 - 2,
         alignment: Alignment.centerLeft,
         child: TextField(
-          controller:_controllerLowRisk,
+          key: Key('LowRiskEditable'),
+          controller: _controllerLowRisk,
           decoration:
               InputDecoration(hintText: metricRisks[_pageNumber]._lowRiskName),
         ),
@@ -949,7 +946,8 @@ class RiskState extends State<RiskCalculator> {
         height: containerHeight * 0.25 - 2,
         alignment: Alignment.centerLeft,
         child: TextField(
-          controller:_controllerMedRisk,
+          key: Key('MedRiskEditable'),
+          controller: _controllerMedRisk,
           decoration:
               InputDecoration(hintText: metricRisks[_pageNumber]._medRiskName),
         ),
@@ -965,9 +963,10 @@ class RiskState extends State<RiskCalculator> {
           height: containerHeight * 0.25 - 2,
           alignment: Alignment.centerLeft,
           child: TextField(
-            controller:_controllerHighRisk,
-            decoration:
-                InputDecoration(hintText: metricRisks[_pageNumber]._highRiskName),
+            key: Key('HighRiskEditable'),
+            controller: _controllerHighRisk,
+            decoration: InputDecoration(
+                hintText: metricRisks[_pageNumber]._highRiskName),
           )),
     );
     return toRet;
