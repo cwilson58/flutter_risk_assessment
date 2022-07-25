@@ -15,6 +15,9 @@ class RiskState extends State<RiskCalculator> {
   String _stringState = "Red";
   int _pageNumber = 0;
 
+  bool _homePage = true;
+  bool _isEditing = false;
+
   String assessNextString = "Next";
   String assessPreviousString = "Leave";
 
@@ -81,7 +84,6 @@ class RiskState extends State<RiskCalculator> {
     setState(() {});
   }
 
-  bool _homePage = true;
   void _sethomePage() {
     setState(() {
       assessNextString = "Next";
@@ -95,7 +97,6 @@ class RiskState extends State<RiskCalculator> {
     super.initState();
   }
 
-  bool _isEditing = false;
   void _setEditMetric() {
     setState(() {
       if (editButtonString == "Edit") {
@@ -124,6 +125,20 @@ class RiskState extends State<RiskCalculator> {
         editButtonString = "Edit";
       }
       _isEditing = !_isEditing;
+    });
+  }
+
+  void _addMetric() {
+    setState(() {
+      metricRisks.add(Metric.param(
+          "Metric Name",
+          "No risk placeholder",
+          "Low risk holder",
+          "Medium risk placeholder",
+          "High risk placeholder"));
+      _pageNumber = metricRisks.length - 1;
+      _sethomePage();
+      setButtonsText();
     });
   }
 
@@ -482,32 +497,53 @@ class RiskState extends State<RiskCalculator> {
             Visibility(
               visible: _homePage,
               child: Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                padding: EdgeInsets.only(
-                    left: mainWindowWidth * 0.45,
-                    right: mainWindowWidth * 0.45),
-                child: SizedBox(
-                  width: appWidth * 0.1,
-                  height: 24,
-                  child: TextButton(
-                    onPressed: _sethomePage,
-                    style: ButtonStyle(
-                      foregroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          Colors.blue.shade800),
-                    ),
-                    key: const Key('AssessButton'),
-                    child: const Text(
-                      "Assess",
-                      style: TextStyle(
-                        color: Color(0xFFFFFFFF),
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+                  margin: const EdgeInsets.only(bottom: 20),
+                  child: ButtonBar(
+                      alignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        SizedBox(
+                          width: appWidth * 0.1,
+                          height: 24,
+                          child: TextButton(
+                            onPressed: _addMetric,
+                            style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.blue.shade800),
+                            ),
+                            key: const Key('AddMetricButton'),
+                            child: const Text(
+                              "Add Metric",
+                              style: TextStyle(
+                                color: Color(0xFFFFFFFF),
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: appWidth * 0.1,
+                          height: 24,
+                          child: TextButton(
+                            onPressed: _sethomePage,
+                            style: ButtonStyle(
+                              foregroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white),
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.blue.shade800),
+                            ),
+                            key: const Key('AssessButton'),
+                            child: const Text(
+                              "Assess",
+                              style: TextStyle(
+                                color: Color(0xFFFFFFFF),
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ])),
             ),
             Visibility(
                 visible: !_homePage,
