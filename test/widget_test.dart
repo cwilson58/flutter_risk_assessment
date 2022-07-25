@@ -128,6 +128,10 @@ void main() {
         'Yellow');
   });
   //Test for phase 2
-
+  testWidgets(
+      'Can Enter Edit for First Metric', (WidgetTester tester) async {});
+  testWidgets('Edits Save for First Metric After leaving Edit State',
+      (WidgetTester tester) async {});
   //Not previously covered state tests
 }
+//  testWidgets('', (WidgetTester tester) async {});
