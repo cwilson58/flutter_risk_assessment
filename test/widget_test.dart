@@ -164,6 +164,16 @@ void main() {
     await tester.pump();
     expect(find.text('Test Name').hitTestable(), findsOneWidget);
   });
+  testWidgets('Add a new metric', (WidgetTester tester) async {
+    tester.binding.window.devicePixelRatioTestValue = 1.0;
+    tester.binding.window.physicalSizeTestValue = Size(1920, 1080);
+    await tester.pumpWidget(MyApp());
+    await tester.tap(find.byKey(const Key('AddMetricButton')));
+    await tester.pump();
+
+    expect(find.text('Metric Name').hitTestable(),findsOneWidget);
+
+  });
   //Not previously covered state tests
 }
 //  testWidgets('', (WidgetTester tester) async {});
