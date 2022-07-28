@@ -33,17 +33,17 @@ void main() {
   });
   test('1/3 < risk < 2/3', () {
     Metric metric = Metric();
-    metric.setLowRisk(2);
-    metric.setNoRisk(1);
-    metric.calcRisk();
-    expect(metric.getRisk(), (2 / 3) / 3);
-  });
-  test('2/3 < risk < 1', () {
-    Metric metric = Metric();
     metric.setMedRisk(2);
     metric.setNoRisk(1);
     metric.calcRisk();
     expect(metric.getRisk(), (4 / 3) / 3);
+  });
+  test('2/3 < risk < 1', () {
+    Metric metric = Metric();
+    metric.setHighRisk(3);
+    metric.setNoRisk(1);
+    metric.calcRisk();
+    expect(metric.getRisk(), 3 / 4);
   });
   //Boundary Tests
   test('Green Boundary Respected', () {
